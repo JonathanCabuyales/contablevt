@@ -1,0 +1,83 @@
+<br>
+<div class="buscarProser">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+    </svg>
+    <input type="text" placeholder="Buscar..." name="documentID" (keyup)="applyFilter($event.target.value)">
+</div>
+<br>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px;"> {{ element.nombres_cli }} {{ element.apellidos_cli }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ciruc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px;"> <b>{{element.ciruc_cli}}</b> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Total a Factura </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 12px;">
+                {{ element.total_prefac }} $
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Acciones </th>
+            <td mat-cell *matCellDef="let element" style="display: flex; justify-content: space-evenly;"> 
+                <span class="btncobrar" (click)="generarFactura(element)">
+                    Cobrar
+                </span>
+                <span class="btnconvenio" (click)="convenio(element)" *ngIf="element.total_prefac >= 25.00 && element.convenio == 0">
+                    Convenio
+                </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="convenio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Convenio </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 12px;">
+                <div *ngIf="element.convenio == 1">
+                    SI
+                </div>
+                <div *ngIf="element.convenio == 0">
+                    NO
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pagos">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> # Pagos </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 12px;">
+                {{ element.numerospagos_con }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cuota">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right;"> Valor </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right; font-size: 12px;">
+                {{ element.valorpagos_con }} $
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones2">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right;"> Acciones </th>
+            <td mat-cell *matCellDef="let element" style="text-align: right;"> 
+                <span class="btncobrar" (click)="generarFacturaConvenio(element)" *ngIf="element.convenio == 1">
+                    Cobrar
+                </span>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

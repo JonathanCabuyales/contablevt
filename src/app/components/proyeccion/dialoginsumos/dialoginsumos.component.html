@@ -1,0 +1,32 @@
+<h2 style="text-align: center;">Insumo</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Detalle: </b></span>
+        <input type="text" class="form-control" placeholder="Detalle" [(ngModel)]="insumo.detalle" (keyup.enter)="grabarInsumo()">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Cantidad: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Cantidad"
+            [(ngModel)]="insumo.cantidad" (keyup.enter)="grabarInsumo()">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Valor: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Valor"
+            [(ngModel)]="insumo.valor" (keyup.enter)="grabarInsumo()">
+    </div>
+    <div class="col-sm-6" style="padding: 35px 10px;">
+        <mat-checkbox class="example-margin" [(ngModel)]="checked"><b>Total Tiempo Proyecto</b></mat-checkbox>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+        <br>
+        <button class="btn" (click)="grabarInsumo()">Registrar</button>
+    </div>
+</div>

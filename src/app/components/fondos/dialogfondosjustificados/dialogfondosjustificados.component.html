@@ -1,0 +1,152 @@
+<div class="justificacion">
+    <h4>Justificación De Fondos</h4>
+    <div class="row">
+        <div class="col-sm-3"><span><b>Descripción: </b></span>
+            <br>
+            <span>{{ fondo.descripcion_fon }}</span>
+        </div>
+        <div class="col-sm-3"><span><b>Monto Asignado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.monto_fon | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: green;"><b>Monto Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.justificado_fonjus | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: red;"><b>Monto No Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.nojustificado_fonjus | number:'1.2-2':'fr' }} $</p>
+        </div>
+    </div>
+
+    
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; font-weight: 600; text-align: center;">
+                    {{ element.monto | number:'1.2-2':'fr' }} $
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px;">
+                    {{ element.descripcion }}
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="foto">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fotografía </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                    <a [href]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"
+                        data-lightbox="photos">
+                        <img class="img-fluid fotodetalles"
+                            [src]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"></a>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="fechaasignacion">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha Justificación </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center;">
+                    {{ element.fecha }}
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px; text-align: center;">
+    
+                    <button (click)="deleteDetalle(element)" mat-icon-button>
+                        <mat-icon color="warn">delete</mat-icon>
+                      </button>
+    
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    
+        <mat-paginator class="piepaginaTables" [pageSizeOptions]="[4, 6]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+</div>
+
+
+<!-- <div class="justificacion">
+
+    <h4>Justificación De Fondos</h4>
+    <div class="row">
+        <div class="col-sm-3"><span><b>Descripción: </b></span>
+            <br>
+            <span>{{ fondo.descripcion_fon }}</span>
+        </div>
+        <div class="col-sm-3"><span><b>Monto Asignado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.monto_fon | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: green;"><b>Monto Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.justificado_fonjus | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: red;"><b>Monto No Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondo.nojustificado_fonjus | number:'1.2-2':'fr' }} $</p>
+        </div>
+    </div>
+
+</div>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 14px; font-weight: 600; text-align: center;">
+                {{ element.monto | number:'1.2-2':'fr' }} $
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 14px;">
+                {{ element.descripcion }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="foto">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fotografía </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <a [href]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"
+                    data-lightbox="photos">
+                    <img class="img-fluid fotodetalles"
+                        [src]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"></a>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaasignacion">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha Justificación </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center;">
+                {{ element.fecha }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px; text-align: center;">
+
+                <button (click)="deleteDetalle(element)" mat-icon-button>
+                    <mat-icon color="warn">delete</mat-icon>
+                  </button>
+
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+</div> -->

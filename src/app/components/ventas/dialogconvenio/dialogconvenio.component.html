@@ -1,0 +1,42 @@
+<h2 style="text-align: center;">Convenio de Pago</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <label>{{ prefacturaConvenio.nombres_cli }} {{ prefacturaConvenio.apellidos_cli }}</label>
+    </div>
+    <div class="col-sm-6">
+        <label><b>Cedula/RUC:</b> {{ prefacturaConvenio.ciruc_cli }} </label>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <label><b>Monto Convenio:</b> {{ prefacturaConvenio.neto_prefac }} $</label>
+    </div>
+    <div class="col-sm-6">
+        <div class="datosinstalacion">
+            <select [(ngModel)]="pagos" (change)="capturar()">
+                <option value="0">Plazo</option>
+                <option value="1">1 pago</option>
+                <option value="3">3 pagos</option>
+                <option value="6">6 pagos</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span style="margin: 0 10px;"><b>Número de pagos: </b> {{ numeroPagos }}</span>
+    </div>
+    <div class="col-sm-6">
+        <span style="margin: 0 10px;"><b>Valor cuota: </b> {{ valorCuota }} $</span>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btnEmpleado">
+            <button class="btn" (click)="registrarConvenio()">Registrar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<h2 style="text-align: center;">Item</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Descripción: </b></span>
+        <input type="text" class="form-control" placeholder="Descripción" [(ngModel)]="item.descripcion">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Cantidad: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Cantidad" [(ngModel)]="item.cantidad">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Precio: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Precio" [(ngModel)]="item.precio">
+    </div>
+    <div class="col-sm-6">
+        <div class="selectProSer">
+            <span><b>Categoria</b></span>
+          <select [(ngModel)]="item.categoria">
+            <option value="0">Selecciona una opción</option>
+            <option value="PRODUCTO">Producto</option>
+            <option value="SERVICIO">Servicio</option>
+          </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+        <br>
+        <button class="btn" (click)="grabarItem()">Registrar</button>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="tituloFactura">
+    <h2>Crear Solicitud De Permiso</h2>
+    <div class="cabeceraFactura">
+        <div class="row">
+            <div class="col-sm-3">
+                <span><b>Fecha Permiso: </b></span>
+                <input type="date" style="width: 100%; padding: 5px;" id="start" name="trip-start" value="2021" min="2022-01-01"
+                    [(ngModel)]="fechapermiso">
+            </div>
+            <div class="col-sm-3">
+                <span><b>Descripción Permiso: </b></span>
+                <!-- <input type="text" class="form-control" [(ngModel)]="motivopermiso"> -->
+        
+                <textarea placeholder="Descripción permiso..." rows="3" cols="28" style="resize: none; padding: 3px;"
+                    [(ngModel)]="motivopermiso"></textarea>
+            </div>
+            <div class="col-sm-3">
+                <br>
+                <button class="btn btngrabar" style="float: left;" (click)="guardarPermiso()">Registrar</button>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <br>
+        
+    </div>
+    <div style="width: 98%; margin-left: 1%;">
+
+        <div class="mat-elevation-z8" style="width: 100%">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <!-- descripcion, fechapedido, aprobado, fechaaprobado, acciones -->
+        
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                    <td mat-cell *matCellDef="let element" style="font-size: 14px; font-weight: 600;"> 
+                        {{ element.motivo_per }}</td>
+                </ng-container>
+        
+                <ng-container matColumnDef="fechapedido">
+                    <th mat-header-cell *matHeaderCellDef> Fecha Permiso </th>
+                    <td mat-cell *matCellDef="let element" style="font-size: 14px;"> 
+                        {{ element.fecha_per }} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="aprobado">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Aprobado </th>
+                    <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center;"> 
+                        {{element.aprobado_per}} </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="fechaaprobado">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha Aprobado </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 14px; text-align: center;"> 
+                        {{ element.fechaapro_per }}
+                    </td>
+                </ng-container>
+        
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;">Acciones</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                        <!-- <span title="Reenviar Solicitud" (click)="reenviarPermiso(elemet)">
+        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svgMail" enable-background="new 0 0 24 24" height="24px"
+                                viewBox="0 0 24 24" width="24px" fill="#1C90DE">
+                                <g>
+                                    <rect fill="none" height="24" width="24" />
+                                    <path
+                                        d="M20,4H4C2.9,4,2,4.9,2,6v12c0,1.1,0.9,2,2,2h9v-2H4V8l8,5l8-5v5h2V6C22,4.9,21.1,4,20,4z M12,11L4,6h16L12,11z M19,15l4,4 l-4,4v-3h-4v-2h4V15z" />
+                                </g>
+                            </svg>
+                        </span> -->
+
+                        <button mat-icon-button title="Eliminar Solicitud" (click)="eliminarPermiso(element)">
+                            <mat-icon color="warn">delete</mat-icon>
+                        </button>
+        
+                    </td>
+                </ng-container>
+        
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            </table>
+        
+            <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    
+    <br>
+</div>

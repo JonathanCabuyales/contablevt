@@ -1,0 +1,28 @@
+<h2>EMAPA PED</h2>
+<p>Notificaciones, Cortes y Reconexiones EMAPA - PED</p>
+<!-- <router-outlet></router-outlet> -->
+
+
+<!-- #enddocregion slow-animation-duration -->
+<mat-tab-group animationDuration="1000ms" [selectedIndex]="active" (selectedIndexChange)="onTabChange($event)">
+    <mat-tab label="Notificaciones">
+        <app-dialognotificaciones #notificaciones></app-dialognotificaciones>
+    </mat-tab>
+
+    <mat-tab label="Cortes">
+        <app-dialogcortes #cortes></app-dialogcortes>
+    </mat-tab>
+
+    <mat-tab label="Reconexión">
+        <app-dialogreconexiones #reconexiones></app-dialogreconexiones>
+    </mat-tab>
+
+    <mat-tab label="Novedades">
+        <app-dialognovedades #novedades></app-dialognovedades>
+    </mat-tab>
+
+    <!-- <mat-tab label="catastros bd nueva">
+        <app-catastros #catatros></app-catastros>
+    </mat-tab> -->
+
+</mat-tab-group>

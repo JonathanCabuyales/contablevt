@@ -1,0 +1,6 @@
+-- CONSULTA DE ASIGNACION DE INVENTARIO
+-- POR UNIDAD
+-- select usu.nombres, usu.apellidos, descripcion_proser, stockasignado_inv 
+-- from inventario_asignado inv, usuarios usu, productos_servicios proser
+-- where usu.id_usuario = '1'
+-- and proser.id_proser = '8'

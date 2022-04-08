@@ -1,0 +1,58 @@
+<div class="comprasregistradas">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="numerofac">
+                <th mat-header-cell *matHeaderCellDef> Número Factura </th>
+                <td mat-cell *matCellDef="let element"> <b>{{element.id_com}}</b> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="conceptofac">
+                <th mat-header-cell *matHeaderCellDef> Proveedor </th>
+                <td mat-cell *matCellDef="let element"> {{element.razonsocial_prove}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="items">
+                <th mat-header-cell *matHeaderCellDef> Items </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <!-- <label *ngFor="let item of lista">
+
+                    </label> -->
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipocom">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Tipo Compra </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.tipocomprobante_com}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Tipo Compra </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.costogasto_com}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha Registro </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.create_at}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Eliminar</th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                    <button (click)="deleteProdSer(element)" mat-icon-button>
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>

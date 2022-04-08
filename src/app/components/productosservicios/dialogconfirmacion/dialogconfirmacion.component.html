@@ -1,0 +1,13 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div mat-dialog-content class="dialog">
+    <h2>Eliminar Registro</h2>
+    <br>
+    <label>Esta Seguro que desea eliminar este registro?</label>
+
+</div>
+<div mat-dialog-actions style="display: flex; align-items: flex-end; float: right;">
+    <button mat-button class="btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="btn" (click)="confirmar()" >Si</button>
+</div>

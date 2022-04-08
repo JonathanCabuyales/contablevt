@@ -1,0 +1,126 @@
+<div class="justificacion">
+    <h4>Justificación De Fondos</h4>
+    <div class="row">
+        <div class="col-sm-3"><span><b>Descripción: </b></span>
+            <br>
+            <span>{{ fondoasignado.descripcion_fon }}</span>
+        </div>
+        <div class="col-sm-3"><span><b>Monto Asignado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondoasignado.monto_fon | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: green;"><b>Monto Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondojustificado | number:'1.2-2':'fr' }} $</p>
+        </div>
+        <div class="col-sm-3"><span style="color: red;"><b>Monto No Justificado: </b></span>
+            <br>
+            <p style="text-align: center;">{{ fondonojustificado | number:'1.2-2':'fr' }} $</p>
+        </div>
+    </div>
+
+    <h4>Detalles De Justificación</h4>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <span><b>Monto: </b></span>
+            <br>
+            <input type="number" placeholder="Monto Detalle" class="form-control" (keyup.enter)="registrardetalle()"
+                [(ngModel)]="valorjustificacion">
+        </div>
+        <div class="col-sm-3">
+            <span><b>Descripción Detalle: </b></span>
+            <br>
+            <input type="text" placeholder="Descripción Detalle" class="form-control" (keyup.enter)="registrardetalle()"
+                [(ngModel)]="descripcionjustificacion">
+        </div>
+        <div class="col-sm-3">
+            <label class="custom-file-upload">
+                <div class="fondoimagen">
+                    <img [src]="imagenDetalle == '' ? '../../../assets/img/img_no.jpg' : imagenDetalle"
+                        alt="Foto perfil" title="Foto de perfil">
+                    <input class="input-file" #nuestroinput (change)="capturarFile($event)" type="file"
+                        accept=".png,.jpg">
+
+                    <progress id="file" style="width:100%" [value]="( uploadPercent | async )"> </progress>
+
+                </div>
+            </label>
+        </div>
+        <div class="col-sm-3">
+            <br>
+            <button class="btn btngrabar" (click)="registrardetalle()"> <svg xmlns="http://www.w3.org/2000/svg"
+                    height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z" />
+                </svg> Registrar Detalle </button>
+        </div>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- 'descripcion', 'monto', 'foto', 'fechaasignacion','acciones' -->
+
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; font-weight: 600; text-align: center;">
+                    {{ element.monto | number:'1.2-2':'fr' }} $
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px;">
+                    {{ element.descripcion }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="foto">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fotografía </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+                    <a [href]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"
+                        data-lightbox="photos">
+                        <img class="img-fluid fotodetalles"
+                            [src]="element.foto == '' ? '../../../assets/img/img_no.jpg' : element.foto"></a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechaasignacion">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Fecha Justificación </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center;">
+                    {{ element.fecha }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px; text-align: center;">
+                    <!-- <button (click)="justificardetalle(element)" class="btnasignar" title="justificar" mat-icon-button>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
+                            viewBox="0 0 24 24" width="24px" fill="#000000">
+                            <rect fill="none" height="24" width="24" />
+                            <g>
+                                <path
+                                    d="M15,10c0-0.55,0.45-1,1-1s1,0.45,1,1c0,0.55-0.45,1-1,1S15,10.55,15,10z M8,9h5V7H8V9z M22,7.5v6.97l-2.82,0.94L17.5,21 L12,21v-2h-2v2l-5.5,0C4.5,21,2,12.54,2,9.5S4.46,4,7.5,4l5,0c0.91-1.21,2.36-2,4-2C17.33,2,18,2.67,18,3.5 c0,0.21-0.04,0.4-0.12,0.58c-0.14,0.34-0.26,0.73-0.32,1.15l2.27,2.27H22z M20,9.5h-1L15.5,6c0-0.65,0.09-1.29,0.26-1.91 C14.79,4.34,14,5.06,13.67,6L7.5,6C5.57,6,4,7.57,4,9.5c0,1.88,1.22,6.65,2.01,9.5L8,19v-2h6v2l2.01,0l1.55-5.15L20,13.03V9.5z" />
+                            </g>
+                        </svg>
+
+                    </button> -->
+
+                    <button (click)="deleteDetalle(element)" mat-icon-button>
+                        <mat-icon color="warn">delete</mat-icon>
+                      </button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator class="piepaginaTables" [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+</div>

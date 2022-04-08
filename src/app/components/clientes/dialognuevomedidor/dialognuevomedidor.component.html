@@ -1,0 +1,40 @@
+<div class="margen">
+    <h2>Nuevo Medidor</h2>
+    <br>
+    <div class="row">
+        <div class="cabecera">
+            <button class="btn btncliente" (click)="clientes()">Cliente</button>
+            <span><b>Cliente: </b> {{ clienteSeleccionado.nombres_cli }} {{ clienteSeleccionado.apellidos_cli }}</span>
+            <span><b>CI / RUC: </b> {{ clienteSeleccionado.ciruc_cli }}</span>
+            <span><b>Dirección: </b> {{ clienteSeleccionado.direccion_cli }}</span>
+            <span><b>Teléfono: </b>{{ clienteSeleccionado.telefono_cli }}</span>
+        </div>
+    </div>
+    <br>
+    <h2>Datos Instalación</h2>
+    <br>
+    <div class="row">
+        <div class="datosinstalacion">
+            <span><b>Número de medidor: </b></span> <input type="text" class="form-control" style="width: auto;" [(ngModel)]="numeroMedidor">
+            <select [(ngModel)]="pagos" (change)="capturar()">
+                <option value="0">Plazo</option>
+                <option value="1">1 pago</option>
+                <option value="3">3 pagos</option>
+                <option value="6">6 pagos</option>
+            </select>
+            <div style="text-align: right;">
+                <span style="margin: 0 10px;"><b>Número de pagos: </b> {{ numeroPagos }}</span>
+                <span style="margin: 0 10px;"><b>Valor cuota: </b> {{ valorCuota }} $</span>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+    <button class="btn btncliente" *ngIf="btnRegistrar" (click)="registrarMedidor()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+            width="24px" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z" />
+        </svg> Guardar Registro</button>
+    <br>
+</div>

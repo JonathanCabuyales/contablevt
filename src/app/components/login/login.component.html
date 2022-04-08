@@ -1,0 +1,29 @@
+<div class="login1">
+
+    <video src="../../../assets/video/VT1.mp4" onloadedmetadata="this.muted=true" autoplay loop preload="auto"></video>
+
+    <div class="login">
+        <div class="inputs">
+            <h2>Inicio de Sesión</h2>
+            <input type="text" placeholder="Usuario" [(ngModel)]="user" (keyup.enter)="enter()">
+            <br>
+            <input type="password" placeholder="Contraseña" [(ngModel)]="password" (keyup.enter)="enter()">
+            <br>
+            <button type="button" class="btn btn-primary" (click)="enter()">Ingresar</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- <div class="login">
+    <div class="inputs">
+        <h2>Inicio de Sesión</h2>
+        <input type="text" placeholder="Usuario" [(ngModel)]="user">
+        <br>
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password">
+        <br>
+        <input type="password" placeholder="Confirmar Contraseña" [(ngModel)]="passwordConfirm">
+        <br>
+        <button type="button" class="btn btn-primary" (click)="enter()">Ingresar</button>
+    </div>
+</div> -->

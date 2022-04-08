@@ -1,0 +1,92 @@
+<h2 style="text-align: center;">Item</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Codigo Barras *: </b></span>
+        <input type="text" class="form-control" placeholder="Codigo Barras" [(ngModel)]="item.codigobarras">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Número de lote: </b></span>
+        <input type="text" class="form-control" placeholder="Número de lote" [(ngModel)]="item.numerolote">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Fecha Elaboración: </b></span>
+        <input type="date" id="start" name="trip-start" [(ngModel)]="item.fechaelaboracion">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Fecha Vencimiento: </b></span>
+        <input type="date" id="start" name="trip-start" [(ngModel)]="item.fechavencimiento">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <span><b>Nombre *: </b></span>
+        <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="item.nombre_proser">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Descripción: </b></span>
+        <input type="text" class="form-control" placeholder="Descripción" [(ngModel)]="item.descripcion">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Cantidad *: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Cantidad"
+            [(ngModel)]="item.cantidad">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Precio *: <span title="El precio del prodcuto es sin IVA en cualquier caso">
+                <svg xmlns="http://www.w3.org/2000/svg" class="svgSearch" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path
+                        d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                </svg>
+            </span></b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Precio (sin IVA)"
+            [(ngModel)]="item.precio">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Descuento: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Descuento"
+        [(ngModel)]="item.descuento">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="selectProSer">
+            <span><b>% IVA *</b></span>
+            <select [(ngModel)]="ivaSelccion">
+                <option value="0">Seleccione</option>
+                <option value="12">12 %</option>
+                <option value="1">0 %</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="selectProSer">
+            <span><b>Categoria *: </b></span>
+            <select [(ngModel)]="item.categoria">
+                <option value="0">Selecciona una opción</option>
+                <option value="PRODUCTO">Producto</option>
+                <option value="SERVICIO">Servicio</option>
+                <option value="SUMINISTROS">Suministros</option>
+                <option value="SUJETOCONTROL">Sujeto Control</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6">
+        <br>
+        <button class="btn" (click)="grabarItem()">Registrar</button>
+    </div>
+</div>

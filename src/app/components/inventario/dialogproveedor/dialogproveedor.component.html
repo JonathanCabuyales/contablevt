@@ -1,0 +1,89 @@
+<div mat-dialog-content class="dialog">
+    <h2>Datos Del Proveedor</h2>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Razon Social: </b></p>
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+              [(ngModel)]="proveedor.razonsocial_prove" placeholder="Razon Social" (keyup.enter)="guardar()">
+            <!-- [(ngModel)]="cliente.apellidos_cli" -->
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Cédula/RUC:</b></p>
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" value="" style="text-align: right;" class="form-control"
+            [(ngModel)]="proveedor.ciruc_prove" placeholder="C.I / RUC" maxlength="13" (keyup.enter)="guardar()">
+               <!--  [(ngModel)]="cliente.ciruc_cli"  -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Dirección:</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+            [(ngModel)]="proveedor.direccion_prove" placeholder="Dirección" (keyup.enter)="guardar()">
+                <!-- [(ngModel)]="cliente.direccion_cli"  -->
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Email</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control" 
+            [(ngModel)]="proveedor.email_prove" placeholder="Email" (keyup.enter)="guardar()">
+
+            <!-- [(ngModel)]="cliente.email_cli" -->
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Teléfono/Celular:</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+            [(ngModel)]="proveedor.telefono_prove" placeholder="Teléfono / Celular" maxlength="10" (keyup.enter)="guardar()">
+
+                 <!-- [(ngModel)]="cliente.telefono_cli" -->
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Descripción:</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+            [(ngModel)]="proveedor.descripcion_prove" placeholder="Descripción (Opcional)" (keyup.enter)="guardar()">
+                 <!-- [(ngModel)]="cliente.telefono_cli" -->
+        </div>
+
+    </div>
+
+</div>
+
+<div mat-dialog-actions style="display: flex; align-items: flex-end; float: right;">
+
+    <button mat-button class="btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="btn btngrabar" (click)="guardar()">Guardar</button>
+
+</div>

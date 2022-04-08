@@ -1,0 +1,73 @@
+<div class="empleadosform">
+    <div class="headerProSer">
+
+        <div class="buscarProser">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+            </svg>
+            <input type="text" placeholder="Buscar..." name="documentID" (keyup)="applyFilter($event.target.value)">
+        </div>
+
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- 'nombre', 'monto', 'descripcion', 'acciones' -->
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px;"> {{ element.apellidos }} {{
+                    element.nombres }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="monto">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto Asignado </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px; font-weight: 600; text-align: center;">
+                    {{ element.monto_fon | number:'1.2-2':'fr' }} $
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px;"> {{ element.descripcion_fon }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="justificado">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto Justificado </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center; color: green;">
+                    {{ element.justificado_fonjus | number:'1.2-2':'fr' }} $
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nojustificado">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Monto Sin Justificar </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 14px; text-align: center; color: red;">
+                    {{ element.nojustificado_fonjus | number:'1.2-2':'fr' }} $
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px; text-align: center;">
+                    <button (click)="verdetallesasignacion(element)" class="btnasignar" mat-icon-button>
+                        <svg class="svgdetallesjus" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#109D7D">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                                d="M21 7.28V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-2.28c.59-.35 1-.98 1-1.72V9c0-.74-.41-1.37-1-1.72zM20 9v6h-7V9h7zM5 19V5h14v2h-6c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h6v2H5z" />
+                            <circle cx="16" cy="12" r="1.5" />
+                        </svg>
+
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+    <br><br>
+</div>

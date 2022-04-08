@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="custom-file-upload">
+                <span style="font-weight: 600;">Contrato: </span>
+                <input class="inputFile" type="file" accept=".pdf" id="pdfContrato" (change)="contrato($event)">
+
+                <progress id="file" max="100" [value]="( uploadPercentC | async )"></progress>
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div style="width: 50px; height: 100px;">
+
+            <pdf-viewer [src]="pdfContrato" [render-text]="true" [original-size]="true" [zoom]="0.2" [show-all]="false"
+                [page]="1" style="display: block;">
+            </pdf-viewer>
+        </div>
+
+    </div>
+
+    <div class="col-sm-3">
+        <label class="custom-file-upload">
+            <span style="font-weight: 600;">Aviso IESS: </span>
+
+            <input (change)="IESS($event)" class="inputFile" type="file" accept=".pdf" id="pdfIESS">
+            <progress id="file" max="100" [value]="( uploadPercentI | async )"> 70% </progress>
+        </label>
+    </div>
+    <div class="col-sm-3">
+        <div style="width: 50px; height: 100px;">
+
+            <pdf-viewer [src]="pdfIESS" [render-text]="true" [original-size]="true" [zoom]="0.2" [show-all]="false"
+                [page]="1" style="display: block;">
+            </pdf-viewer>
+        </div>
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label class="custom-file-upload">
+                <span style="font-weight: 600;">Hoja de vida: </span>
+                <input class="inputFile" type="file" accept=".pdf" id="pdfCV" (change)="CV($event)">
+                <progress id="file" max="100" [value]="( uploadPercentH | async )"> 70% </progress>
+            </label>
+
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div style="width: 50px; height: 100px;">
+
+            <pdf-viewer [src]="pdfCV" [render-text]="true" [original-size]="true" [zoom]="0.2" [show-all]="false"
+                [page]="1" style="display: block;">
+            </pdf-viewer>
+        </div>
+
+    </div>
+    <div class="col-sm-3">
+
+        <label class="custom-file-upload">
+            <span style="font-weight: 600;">Cédula: </span>
+
+            <input (change)="cedula($event)" class="inputFile" type="file" accept=".pdf" id="pdfCedula">
+
+            <progress id="file" max="100" [value]="( uploadPercentCe | async )"> 70% </progress>
+        </label>
+    </div>
+    <div class="col-sm-3">
+        <div style="width: 50px; height: 100px;">
+
+            <pdf-viewer [src]="pdfCedula" [render-text]="true" [original-size]="true" [zoom]="0.2" [show-all]="false"
+                [page]="1" style="display: block;">
+            </pdf-viewer>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row" style="float: right">
+    <button class="btn btngrabar" (click)="subirArchivos()">Subir inforamción</button>
+</div>
+
+
+
+<!-- <div class="progress">
+    <div [style.visibility]="(uploadPercent == 0) ? 'hidden' : 'visible'"
+        class="progress-bar progress-bar-striped bg-success" role="progressbar"
+        [style.width]="(uploadPercent | async) +'%'">
+
+        <span class="progressText" *ngIf="urlImage | async">
+            Ok!!</span>
+    </div>
+</div> -->

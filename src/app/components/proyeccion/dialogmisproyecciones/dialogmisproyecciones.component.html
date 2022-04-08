@@ -1,0 +1,119 @@
+<h2 style="background-color: #ececec;">Proyecciones</h2>
+<div class="empleadosform">
+    <div class="buscarProser">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+        <input type="text" placeholder="Buscar..." name="documentID" (keyup)="applyFilter($event.target.value)">
+    </div>
+    <br>
+    <div class="mat-elevation-z8" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="nombres">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsable </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px;"> {{ element.nombres }} {{
+                    element.apellidos
+                    }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción Proyecto </th>
+                <td mat-cell *matCellDef="let element" style="font-size: 12px;">
+                    <span>
+                        <b>Codigo Proceso: {{element.descripcion_pro}}</b>
+                    </span>
+                    <br>
+                    <span>
+                        <b>Observacaciones: </b> {{ element.informacion_pro }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="viabilidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Viabilidad </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 14px;">
+                    <b>{{ element.viabilidad_pro }}</b>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Estado </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 14px;">
+
+                    <span style="color: red; font-weight: 800;" *ngIf="element.estado_pro == 'RECHAZADO'">
+                        {{ element.estado_pro }}
+                    </span>
+
+                    <span style="color: orange; font-weight: 800;" *ngIf="element.estado_pro == 'NO APROBADO'">
+                        {{ element.estado_pro }}
+                    </span>
+
+                    <span style="color: limegreen; font-weight: 800;" *ngIf="element.estado_pro == 'APROBADO'">
+                        {{ element.estado_pro }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fechas">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Fechas </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 12px;">
+
+                    <span><b>Entrega: </b> {{ element.fechas_pro.fechaentrega }}</span>
+                    <br>
+                    <span><b>Calificación: </b> {{ element.fechas_pro.fechacalificacion }}</span>
+                    <br>
+                    <span><b>Convalidación: </b> {{ element.fechas_pro.fechaconvalidacion }}</span>
+                    <br>
+                    <span><b>Puja: </b> {{ element.fechas_pro.fechapuja }}</span>
+
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="detalles">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Detalles </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; font-size: 14px;">
+                    <span title="Detalles PDF">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" (click)="generarPdf(element)" class="pdfsvg"
+                            height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                                d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm12 6V9c0-.55-.45-1-1-1h-2v5h2c.55 0 1-.45 1-1zm-2-3h1v3h-1V9zm4 2h1v-1h-1V9h1V8h-2v5h1zm-8 0h1c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1H9v5h1v-2zm0-2h1v1h-1V9z" />
+                        </svg>
+
+                    </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="precio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Acciones </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                    <span title="Fechas" *ngIf="element.estado_pro == 'APROBADO'">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" (click)="guardarFechas(element)" class="svgFechas"
+                            height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path
+                                d="M7 11h2v2H7v-2zm14-5v14c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2l.01-14c0-1.1.88-2 1.99-2h1V2h2v2h8V2h2v2h1c1.1 0 2 .9 2 2zM5 8h14V6H5v2zm14 12V10H5v10h14zm-4-7h2v-2h-2v2zm-4 0h2v-2h-2v2z" />
+                        </svg>
+
+                    </span>
+
+                    <button (click)="selectItem(element)" mat-icon-button class="svgFechas">
+                        <mat-icon color="primary">check_circle_outline</mat-icon>
+                    </button>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator class="piepaginaTables" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<h2>Sección Compras</h2>
+<!-- #docregion slow-animation-duration -->
+<mat-tab-group animationDuration="1000ms" [selectedIndex]="active" (selectedIndexChange)="onTabChange($event)">
+    <mat-tab style="background-color: navy;" label="Compras">
+        <div class="compras">
+            <app-dialogcompras #compranueva></app-dialogcompras>
+        </div>
+    </mat-tab>
+    <mat-tab label="Compras Registradas">
+        <app-dialogcomprasregistradas #comprasregistradas></app-dialogcomprasregistradas>
+    </mat-tab>
+</mat-tab-group>

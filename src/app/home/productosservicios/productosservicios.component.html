@@ -1,0 +1,22 @@
+<h2>Productos/Servicios</h2>
+<p>Lista de todos los productos o servicios en la empresa</p>
+
+<mat-tab-group animationDuration="1000ms" [selectedIndex]="active" (selectedIndexChange)="onTabChange($event)">
+  
+  <mat-tab label="Proveedores">
+    <app-dialogproveedores #proveedores></app-dialogproveedores>
+  </mat-tab>
+
+  <mat-tab label="Invetario">
+    <app-dialoginventario #inventarionuevo></app-dialoginventario>
+  </mat-tab>
+  
+  <mat-tab label="Inventario Asignado">
+    <app-dialoginventarioasignado #inventarioasignado></app-dialoginventarioasignado>
+  </mat-tab>
+  
+  <mat-tab label="Inventario Esmeraldas">
+    <app-inventarioesmeraldas #iventarioesmeraldas></app-inventarioesmeraldas>
+  </mat-tab>
+
+</mat-tab-group>

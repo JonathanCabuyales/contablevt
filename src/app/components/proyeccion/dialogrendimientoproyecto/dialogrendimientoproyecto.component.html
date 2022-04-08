@@ -1,0 +1,542 @@
+<div class="dialogmargen">
+  <div class="cabeceraProyecto">
+    <h3 style="background: #1d1d24; color: #fff; padding: 7px; text-align: center;">Valores Del Proyecto</h3>
+
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-5">
+        <span><b>Codigo Proceso: </b></span>
+        <input type="text" class="form-control" style="text-transform:uppercase;" placeholder="Codigo Proceso" (keyup.enter)="grabarDescripcion()" [(ngModel)]="descripcionproyecto" autofocus>
+
+        <br>
+      </div>
+      <div class="col-sm-5">
+        <span><b>Observación (Opcional): </b></span>
+        <input type="text" class="form-control" placeholder="Observación" (keyup.enter)="grabarDescripcion()" [(ngModel)]="informacionadicional" autofocus>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <button class="btn btngrabar" style="float: left;" (click)="grabarDescripcion()">Guardar</button>
+      </div>
+      <div class="col-sm-3">
+        
+      </div>
+    </div>
+
+    <br>
+    <div class="row" *ngIf="showValorContrato">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-8">
+        <br>
+        <table class="tableTotalProyecto">
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="text-align: center; background: #1d1d24; color: #fff; width: 20%;"><b>IVA</b></td>
+              <td style="text-align: center; background: #1d1d24; color: #fff; width: 20%;"><b>Valor Total</b></td>
+            </tr>
+            <tr>
+              <th><b>Valor Contrato</b></th>
+              <td style="text-align: center;">
+                <input type="number" placeholder="Valor" [(ngModel)]="valorPrestamo" (keyup.enter)="calcularContrato()">
+              </td>
+              <td style="text-align: center;"><label> {{ ivaValorContrato | number:'1.2-2':'fr' }} $</label></td>
+              <td style="text-align: center;"> {{ valorTotalContrato | number:'1.2-2':'fr' }} $</td>
+            </tr>
+            <tr>
+              <th><b>Retenciones Renta</b></th>
+              <td style="text-align: center;"><label> {{ retencionRenta | number:'1.2-2':'fr' }} $</label></td>
+              <td style="text-align: center;"> {{ ivaRetencionRenta | number:'1.2-2':'fr' }} $</td>
+              <td style="text-align: center;"> {{ valorTotalRetencion | number:'1.2-2':'fr' }} $</td>
+            </tr>
+            <tr>
+              <th><b>Valor A Cobrar</b></th>
+              <td></td>
+              <td></td>
+              <td style="text-align: center; background: #1d1d24; color: #fff; width: 20%;">
+                <b> {{ valoraCobrar | number:'1.2-2':'fr' }} $</b>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="text-align: center;"> </td>
+              <td style="text-align: center;"> <button class="btn btncancelar" *ngIf="showBtnCancel"
+                  (click)="cancelar()">Cancelar</button>
+                <button class="btn" (click)="calcularContrato()" *ngIf="showbtnCalcularvalorproyecto">Calcular</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+  </div>
+  <br>
+  <!--*ngIf="showPersonal"  -->
+  <div class="cabeceraProyecto" *ngIf="showPersonal">
+    <h3 style="background: #1d1d24; color: #fff; padding: 7px; text-align: center;">Personal Del Proyecto</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="agregar">
+          <span><b>Tiempo del proyecto (meses): </b></span>
+          <select [(ngModel)]="tiempoProyecto" (change)="capturar()" [disabled]="showSelect">
+            <option value="0">Selecciona tiempo (meses)</option>
+            <option value="1">1 Mes</option>
+            <option value="2">2 Meses</option>
+            <option value="3">3 Meses</option>
+            <option value="4">4 Meses</option>
+            <option value="5">5 Meses</option>
+            <option value="6">6 Meses</option>
+            <option value="7">7 Meses</option>
+            <option value="8">8 Meses</option>
+            <option value="9">9 Meses</option>
+            <option value="10">10 Meses</option>
+            <option value="11">11 Meses</option>
+            <option value="12">12 Meses</option>
+            <option value="13">13 Meses</option>
+            <option value="14">14 Meses</option>
+            <option value="15">15 Meses</option>
+            <option value="16">16 Meses</option>
+            <option value="17">17 Meses</option>
+            <option value="18">18 Meses</option>
+            <option value="19">19 Meses</option>
+            <option value="20">20 Meses</option>
+            <option value="21">21 Meses</option>
+            <option value="22">22 Meses</option>
+            <option value="23">23 Meses</option>
+            <option value="24">24 Meses</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <br>
+        <!-- *ngIf="showBtnAgregar" -->
+        <button class="btn" (click)="agregarEmpleado()" *ngIf="showBtnAgregar" style="margin: 0;">
+          Agregar empleado<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+            fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+          </svg></button>
+      </div>
+      <div class="col-sm-3">
+        <br>
+        <button class="btn btncancelar" style="margin: 0;" (click)="cancelarEmpelados()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" opacity=".87" />
+            <path
+              d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" />
+          </svg>
+          Elminar Tiempo Del Proyecto </button>
+      </div>
+    </div>
+    <div class="mat-elevation-z8" style="width: 90%; margin-left: 5%;" *ngIf="showBtnAgregar">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="empleado">
+          <th mat-header-cell *matHeaderCellDef> Empleado </th>
+          <td mat-cell *matCellDef="let element"><b> {{ element.empleado | uppercase }} </b></td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidad" style="text-align: center;">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cantidad </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.cantidad | number:'1.2-2':'fr'
+            }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="remuneracion">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Remuneración </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.remuneracion |
+            number:'1.2-2':'fr' }} $</td>
+        </ng-container>
+
+        <ng-container matColumnDef="decimotercer">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 13er Sueldo </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.decimotercer |
+            number:'1.2-2':'fr' }} $</td>
+        </ng-container>
+
+        <ng-container matColumnDef="decimocuarto">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 14to Sueldo </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.decimocuarto |
+            number:'1.2-2':'fr' }} $</td>
+        </ng-container>
+
+        <ng-container matColumnDef="iess">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;"> IESS </th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.iess | number:'1.2-2':'fr' }} $
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">Total</th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;">
+            {{ element.total | number:'1.2-2':'fr' }} $
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center;">Acciones</th>
+          <td mat-cell *matCellDef="let element" style="text-align: center;">
+            <!-- <button (click)="editarEmpledo(element)" mat-icon-button>
+              <mat-icon color="primary" class="btnasignar">edit</mat-icon>
+            </button> -->
+
+            <button (click)="eliminarEmpledo(element)" mat-icon-button>
+              <mat-icon color="primary" class="btnasignar">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <br>
+    <div class="row" *ngIf="showBtnAgregar">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <table style="width: 90%; margin-right: 5%;">
+          <tbody>
+            <tr>
+              <td style="text-align: center;"><b>Total Sueldos Mensual</b></td>
+              <td style="width: 50%;"><label
+                  style="border: 1px solid rgb(136, 136, 136); border-radius: 5px; text-align: right; padding-right: 5px; margin-right: 20%; width: 100%;">
+                  <b>{{ totalEmpleadosSueldos | number:'1.2-2':'fr' }} $</b></label></td>
+            </tr>
+            <tr>
+              <td style="text-align: center;"><b>Total Sueldos Proyecto</b></td>
+              <td style="width: 50%;"><label
+                  style="border: 1px solid rgb(136, 136, 136); border-radius: 5px; text-align: right; padding-right: 5px; margin-right: 20%; width: 100%;">
+                  <b>{{ totalTiempoProyecto | number:'1.2-2':'fr' }} $</b></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <!-- *ngIf="showBtnAgregar" -->
+    <div class="row" *ngIf="showBtnAgregar">
+      <div class="col-sm-12">
+        <br>
+        <button class="btn" (click)="agregarEquipoMinimo()">
+          Agregar Equipo Minimo<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+            fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+          </svg></button>
+        <br>
+        <br>
+        <div class="mat-elevation-z8" style="width: 90%; margin-left: 5%;">
+          <table mat-table [dataSource]="dataEquipoMinimo" matSort>
+
+            <ng-container matColumnDef="detalle">
+              <th mat-header-cell *matHeaderCellDef> Detalles </th>
+              <td mat-cell *matCellDef="let element"><b> {{ element.detalle | uppercase }} </b></td>
+            </ng-container>
+
+            <ng-container matColumnDef="cantidad" style="text-align: center;">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cantidad </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> 
+                {{ element.cantidad | number:'1.2-2':'fr' }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Valor </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> 
+                {{ element.valor | number:'1.2-2':'fr' }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalmes">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Mensual </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.totalMes |
+                number:'1.2-2':'fr' }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Proyecto</th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.total | number:'1.2-2':'fr'
+                }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones</th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <!-- <button (click)="editarEquipoMinimo(element)" mat-icon-button>
+                  <mat-icon color="primary" class="btnasignar">edit</mat-icon>
+                </button> -->
+
+                <button (click)="eliminarEquipoMinimo(element)" mat-icon-button>
+                  <mat-icon color="primary" class="btnasignar">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsEquipoMinimo"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsEquipoMinimo;"></tr>
+          </table>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+            <table style="width: 90%; margin-right: 5%;">
+              <tbody>
+                <tr>
+                  <td style="text-align: center;"><b>Total Equipo Minimo Proyecto</b></td>
+                  <td style="width: 50%;"><label
+                      style="border: 1px solid rgb(136, 136, 136); border-radius: 5px; text-align: right; padding-right: 5px; margin-right: 20%; width: 100%;">
+                      <b>{{ totalEquipoMinimo | number:'1.2-2':'fr' }} $</b></label></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <br>
+    <!-- *ngIf="showBtnAgregar" -->
+    <div class="row" *ngIf="showBtnAgregar">
+      <div class="col-sm-12">
+        <br>
+        <button class="btn" (click)="agregarInsumos()">
+          Agregar Insumo<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+            fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+          </svg></button>
+        <br>
+        <br>
+        <div class="mat-elevation-z8" style="width: 90%; margin-left: 5%;">
+          <table mat-table [dataSource]="dataInsumos" matSort>
+
+            <ng-container matColumnDef="detalle">
+              <th mat-header-cell *matHeaderCellDef> Detalles </th>
+              <td mat-cell *matCellDef="let element"><b> {{ element.detalle | uppercase }} </b></td>
+            </ng-container>
+
+            <ng-container matColumnDef="cantidad" style="text-align: center;">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Cantidad </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.cantidad |
+                number:'1.2-2':'fr' }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Valor </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.valor | number:'1.2-2':'fr'
+                }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalmes">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Mensual </th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.totalMes |
+                number:'1.2-2':'fr' }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Total Proyecto</th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ element.total | number:'1.2-2':'fr'
+                }} $</td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones</th>
+              <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <!-- <button (click)="editarInsumos(element)" mat-icon-button>
+                  <mat-icon color="primary" class="btnasignar">edit</mat-icon>
+                </button> -->
+
+                <button (click)="eliminarInsumos(element)" mat-icon-button>
+                  <mat-icon color="primary" class="btnasignar">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsInsumos"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsInsumos;"></tr>
+          </table>
+        </div>
+      </div>
+      <br>
+    </div>
+    <br>
+    <div class="row" *ngIf="showBtnAgregar">
+      <div class="col-sm-6">
+      </div>
+      <div class="col-sm-6">
+        <table style="width: 90%; margin-right: 5%;">
+          <tbody>
+            <tr>
+              <td style="text-align: center;"><b>Total Insumos Proyecto</b></td>
+              <td style="width: 50%;"><label
+                  style="border: 1px solid rgb(136, 136, 136); border-radius: 5px; text-align: right; padding-right: 5px; margin-right: 20%; width: 100%;">
+                  <b>{{ totalInsumos | number:'1.2-2':'fr' }} $</b></label></td>
+            </tr>
+
+            <tr>
+              <td style="text-align: center; background-color: #1d1d24; color: #fff; border-radius: 5px;">
+                <b>Costo Total Proyecto</b>
+              </td>
+              <td style="width: 50%; text-align: right; background-color: #1d1d24; color: #fff; border-radius: 5px;">
+                <b>{{ costoProyecto | number:'1.2-2':'fr' }} $</b>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align: center; background-color: #1d1d24; color: #fff; border-radius: 5px;">
+                <b>Porcentaje Margen de error</b>
+              </td>
+              <td style="width: 50%; text-align: right; border-radius: 5px;">
+                <input type="number" [(ngModel)]="margenError" placeholder="Porcentaje %"
+                  (keyup.enter)="verificarProyecto()">
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align: center; background-color: #1d1d24; color: #fff; border-radius: 5px;">
+                <b>Porcentaje Bancario</b>
+              </td>
+              <td style="width: 50%; text-align: right; border-radius: 5px;">
+                <input type="number" [(ngModel)]="porcentajeBancario" placeholder="Porcentaje %"
+                  (keyup.enter)="verificarProyecto()">
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="showBtnAgregar">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4"><button class="btn btngrabar" (click)="verificarProyecto()">Verificar Proyecto</button>
+      </div>
+    </div>
+    <br>
+  </div>
+  <!-- *ngIf="showResultados" -->
+  <div class="cabeceraProyecto" *ngIf="showResultados">
+    <h3 style="background: #1d1d24; color: #fff; padding: 7px; text-align: center;">Valores Del Proyecto</h3>
+    <br>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-6">
+            <table class="tableProyeccion">
+              <tbody>
+                <tr>
+                  <th>Inversion</th>
+                  <td> {{ inversion | number:'1.2-2':'fr' }} $</td>
+                </tr>
+                <tr>
+                  <th>Rendimiento Proyecto</th>
+                  <td> {{ rendimiento1 | number:'1.2-2':'fr'}} $</td>
+                </tr>
+                <tr>
+                  <th>Rendimiento Mensual</th>
+                  <td> {{ rendimientoMensual | number:'1.2-2':'fr' }} $</td>
+                </tr>
+                <tr>
+                  <th>Margen error considerable</th>
+                  <td> {{ otrosNoConsiderados | number:'1.2-2':'fr' }} $</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-6">
+            <table class="tableProyeccion">
+              <tbody>
+                <tr>
+                  <th>Total Costo Inversión</th>
+                  <td> {{ totalCostoInversion | number:'1.2-2':'fr' }} $</td>
+                </tr>
+                <tr>
+                  <th>
+                    Comparativo bancario rendimiento mejor tasa Anual
+                  </th>
+                  <td> {{ comparativoBancario | number:'1.2-2':'fr' }} %</td>
+                </tr>
+                <tr>
+                  <th>Rendimiento Comparativo</th>
+                  <td> {{ rendimientoComparativo | number:'1.2-2':'fr' }} $</td>
+                </tr>
+                <tr>
+                  <th>Rendimiento Total Proyecto</th>
+                  <td> {{ rendimientoProyecto | number:'1.2-2':'fr' }} $</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <table class="table tablerendimiento">
+          <tbody>
+            <tr>
+              <td> <label class="bajo" *ngIf="showbajo"> BAJO </label></td>
+              <td>
+                <div class="medio" *ngIf="showmedio"> MEDIO </div>
+              </td>
+              <td>
+                <div class="alto" *ngIf="showalto"> ALTO </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2">
+        <button class="btn btncancelar" (click)="generarPDF()" *ngIf="showBtnPDF"><svg
+            xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm12 6V9c0-.55-.45-1-1-1h-2v5h2c.55 0 1-.45 1-1zm-2-3h1v3h-1V9zm4 2h1v-1h-1V9h1V8h-2v5h1zm-8 0h1c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1H9v5h1v-2zm0-2h1v1h-1V9z" />
+          </svg> Generar PDF</button>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn" (click)="guardarProyeccion()">Guardar Proyección</button>
+      </div>
+      <div class="col-sm-3">
+        <button class="btn" (click)="nuevaProyeccion()" *ngIf="showBtnPDF"> Nueva Proyección</button>
+      </div>
+    </div>
+    <br>
+    <br>
+    <!-- <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <button class="btn" (click)="tablPuja()"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+            viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M20 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 2v3H5V5h15zm-5 14h-5v-9h5v9zM5 10h3v9H5v-9zm12 9v-9h3v9h-3z" />
+          </svg> Tabla Puja</button>
+      </div>
+      <div class="col-sm-4"></div>
+    </div> -->
+    <br>
+  </div>
+</div>

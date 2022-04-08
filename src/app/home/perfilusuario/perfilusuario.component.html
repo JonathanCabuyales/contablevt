@@ -1,0 +1,19 @@
+<h2>Bienvenido</h2>
+
+<!-- <router-outlet></router-outlet> -->
+<!-- #docregion slow-animation-duration -->
+<mat-tab-group animationDuration="1000ms" [selectedIndex]="active" (selectedIndexChange)="onTabChange($event)">
+    
+    <mat-tab label="Perfil">
+        <app-dialogperfilusuario #perfilusuario></app-dialogperfilusuario>
+    </mat-tab>
+
+    <mat-tab label="Rol de Pagos">
+        <app-dialogrolpagosusuario></app-dialogrolpagosusuario>
+    </mat-tab>
+
+    <mat-tab label="Permisos">
+        <app-dialogpermiso></app-dialogpermiso>
+    </mat-tab>
+
+</mat-tab-group>

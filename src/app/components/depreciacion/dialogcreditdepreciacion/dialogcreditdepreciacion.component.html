@@ -1,0 +1,45 @@
+<h2>Nueva Depreciación</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Fecha Compra:</b></span>
+        <input class="fechaEmision" id="date" type="date" style="padding: 4px;" [(ngModel)]="depreciacion.fecha_compra">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Valor Compra:</b></span>
+        <input class="form-control" [(ngModel)]="depreciacion.valor_inicial" id="desc" type="text" style="padding: 4px;">
+    </div>
+    
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Categoria</b></span>
+        <select class="form-select" [(ngModel)]="depreciacion.id_cuentas" style="padding: 5px;">
+            <option *ngFor="let opt of cuentas" [value]="opt.id_cuentas">{{opt.descripcion}}</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <br>
+        <button *ngIf="!data.actualizar" class="btn btngrabar" (click)="guardar()">Guardar</button>
+    </div>
+    <div class="col-sm-6">
+        <br>
+        <button *ngIf="data.actualizar" class="btn btnactualizar" (click)="actualizar()">Actualizar</button>
+    </div>
+    
+</div>
+<!-- <div class="row">
+    <div class="col-sm-6">
+        <span><b>Tiempo Atraso (minutos):</b></span>
+        <input matInput type="number" class="form-control" placeholder="Ejm. 20" [(ngModel)]="tiempoatraso">
+    </div>
+    
+</div> -->
+<!-- <option value="Entrada Oficina">Entrada Oficina</option>
+<option value="Salida Almuerzo">Salida Almuerzo</option>
+<option value="Entrada Almuerzo">Entrada Almuerzo</option>
+<option value="Salida Oficina">Salida Oficina</option> -->

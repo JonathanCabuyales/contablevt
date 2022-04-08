@@ -1,0 +1,21 @@
+export interface FacturaelectronicaI{
+    id_usuario: string,
+    nombre_empresa: string,
+    ciruc_empresa: string,
+    direccion_empresa: string, 
+    nombre_cliente: string,
+    direccion_cliente: string,
+    ciruc_cliente: string,
+    email_cliente: string,
+    totalFactura?: string,
+    totalsinimpu?: string,
+    tipoidentificacion?: string,
+    formapago?: string,
+    subtotal0?: string,
+    subtotal12?: string,
+    ivatotal?: string,
+    items: string,
+    token: string,
+    numeroautorizacion?: string,
+    secuencial?: string
+}

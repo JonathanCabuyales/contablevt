@@ -1,0 +1,83 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div mat-dialog-content class="dialog">
+    <h2>Datos Del Cliente</h2>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Nombres *: </b></p>
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+                [(ngModel)]="cliente.nombres_cli" placeholder="Nombres">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Apellidos *:</b></p>
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+                [(ngModel)]="cliente.apellidos_cli" placeholder="Apellidos">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Cédula/RUC:</b></p>
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" value="" style="text-align: right;" class="form-control"
+                [(ngModel)]="cliente.ciruc_cli" placeholder="C.I / RUC" maxlength="13">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Dirección:</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+                [(ngModel)]="cliente.direccion_cli" placeholder="Dirección">
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Email</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control" [(ngModel)]="cliente.email_cli"
+                placeholder="Email">
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p><b>Teléfono/Celular:</b></p>
+
+        </div>
+        <div class="col-sm-6">
+            <input matInput type="text" style="text-align: right;" class="form-control"
+                [(ngModel)]="cliente.telefono_cli" placeholder="Teléfono / Celular">
+        </div>
+
+    </div>
+
+</div>
+
+<div mat-dialog-actions style="display: flex; align-items: flex-end; float: right;">
+
+    <button mat-button class="btn" (click)="cancelar()">Cancelar</button>
+    <button mat-button class="btn btngrabar" (click)="guardar()">Guardar</button>
+
+</div>

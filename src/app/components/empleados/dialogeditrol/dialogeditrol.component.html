@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-sm-6" style="text-align: center; font-size: 20px; font-weight: 600;">{{ rolupdate.nombres }} {{ rolupdate.apellidos }}</div>
+    <div class="col-sm-6" style="text-align: center; font-size: 20px; font-weight: 600;">Sueldo: <span style="color: rgb(59, 116, 37);">{{ rolupdate.sueldo }} $</span></div>
+
+</div>
+<div class="row">
+    
+    <div class="col-sm-3">
+        <label><b>Días laborados: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Días laborados"
+            [(ngModel)]="sueldo.diastrabajados">
+            <!-- (keyup)="verificardias($event.target.value)" -->
+    </div>
+
+    <div class="col-sm-3">
+        <label><b>Bonos alimentación: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Bonos alimentación"
+            [(ngModel)]="sueldo.bonosalimentacion">
+    </div>
+
+    <div class="col-sm-3">
+        <label><b>Bonos transporte: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Bono transporte"
+            [(ngModel)]="sueldo.bonostransporte">
+    </div>
+    <div class="col-sm-3">
+        <label><b>Otros ingresos: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Otros ingresos"
+            [(ngModel)]="sueldo.otrosingresos">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label><b>horas extras: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Otros ingresos"
+            [(ngModel)]="sueldo.horasextras">
+    </div>
+
+    <div class="col-sm-4">
+        <select class="combobox" style="margin-top: 13%;" (change)="combohoras()" [(ngModel)]="horasextras" [disabled]="showHoras">
+            <option value="0">Tipo de Horas</option>
+            <option value="C">Complementarias</option>
+            <option value="S">Sumplementarias</option>
+        </select>
+    </div>
+
+    <div class="col-sm-4">
+
+        <label><b>Total ingresos: </b></label>
+        <input matInput type="text" style="text-align: right;" class="form-control" disabled
+            [(ngModel)]="sueldo.totalingresos">
+
+    </div>
+</div>
+<div class="row" >
+    <div class="col-sm-4">
+        <label><b>Anticipos: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Anticipos"
+            [(ngModel)]="sueldo.anticipos">
+    </div>
+    <div class="col-sm-4">
+        <label><b>Préstamo Oficina: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Préstamo Oficina"
+            [(ngModel)]="sueldo.prestamos_oficina">
+    </div>
+    <div class="col-sm-4">
+        <label><b>Préstamo Hipotecario: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Préstamo Hipotecario"
+            [(ngModel)]="sueldo.prestamo_hipotecario">
+    </div>
+</div>
+<div class="row" >
+    <div class="col-sm-4">
+        <label><b>Préstamo Quirografario: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control"
+            placeholder="Préstamo Quirografario" [(ngModel)]="sueldo.prestamo_quirografario">
+    </div>
+    <div class="col-sm-4">
+        <label><b>Otros Egresos: </b></label>
+        <input matInput type="number" style="text-align: right;" class="form-control" placeholder="Otros egresos"
+            [(ngModel)]="sueldo.otrosegresos">
+    </div>
+    <div class="col-sm-4">
+
+        <label><b>IESS: </b></label>
+        <input matInput type="text" style="text-align: right; background-color: rgba(168, 63, 63, 0);"
+            class="form-control" disabled [(ngModel)]="sueldo.iessindividual">
+        <br>
+        <label><b>Total egresos: </b></label>
+        <input matInput type="text" style="text-align: right;" class="form-control" disabled
+            [(ngModel)]="sueldo.total_egresos">
+
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <label><b>Total a Recibir: </b></label>
+        <input matInput type="text"
+            style="text-align: right; background-color: rgb(59, 116, 37); font-weight: 600; color: #fff;"
+            class="form-control" disabled [(ngModel)]="sueldo.neto_recibir">
+
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn" (click)="calcularSueldo()" *ngIf="showCalcular">Calcular Sueldo</button>
+        <button class="btn btncancelar" *ngIf="showSueldo" (click)="cancelar()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                <path d="M0 0h24v24H0V0z" fill="none" opacity=".87" />
+                <path
+                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" />
+            </svg>
+            Cancelar </button>
+        <button class="btn btngrabar" (click)="registrarSueldo()" *ngIf="showSueldo"> <svg
+                xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z" />
+            </svg> Registrar Sueldo </button>
+    </div>
+</div>

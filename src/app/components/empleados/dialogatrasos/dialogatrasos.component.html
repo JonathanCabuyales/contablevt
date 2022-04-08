@@ -1,0 +1,31 @@
+<span style="font-size: 20px; text-align: center; font-weight: 600;">
+    {{ usuario.nombres }} {{ usuario.apellidos }}</span>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Fecha:</b></span>
+        <input class="fechaEmision" id="date" type="date" style="padding: 4px;" [(ngModel)]="fechaatraso">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Descripción Atraso:</b></span>
+        <select [(ngModel)]="descripcion" style="padding: 5px;">
+            <option value="0">Intervalo</option>
+            <option value="Entrada Oficina">Entrada Oficina</option>
+            <option value="Salida Almuerzo">Salida Almuerzo</option>
+            <option value="Entrada Almuerzo">Entrada Almuerzo</option>
+            <option value="Salida Oficina">Salida Oficina</option>
+        </select>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Tiempo Atraso (minutos):</b></span>
+        <input matInput type="number" class="form-control" placeholder="Ejm. 20" [(ngModel)]="tiempoatraso">
+    </div>
+    <div class="col-sm-6">
+        <br>
+        <button class="btn btngrabar" (click)="guardarAtraso()">Guardar</button>
+    </div>
+</div>

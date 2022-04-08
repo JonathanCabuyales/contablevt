@@ -1,0 +1,87 @@
+<span style="font-size: 20px; text-align: center; font-weight: 600;">Datos Del Empleado</span>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="imgPerfilEmpleado">
+            <label class="custom-file-upload">
+                <img [src]="empleado.fotoperfil == '' ? '../../../assets/img/foto_perfil_empleado.png': empleado.fotoperfil"
+                    alt="Foto perfil" title="Foto de perfil">
+                <input class="input-file" #nuestroinput (change)="capturarFile($event)" type="file" accept=".png,.jpg">
+                <progress id="file" style="width:100%" [value]="( uploadPercent | async )"> </progress>
+            </label>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+
+    <div class="col-sm-4">
+        <span><b>Nombre:</b></span>
+        <input matInput type="text" class="form-control" readonly="readonly" placeholder="Nombres"
+            [(ngModel)]="empleado.nombres">
+    </div>
+
+    <div class="col-sm-4">
+        <span><b>Apellido:</b></span>
+        <input matInput type="text" class="form-control" readonly="readonly" placeholder="Apellidos"
+            [(ngModel)]="empleado.apellidos">
+    </div>
+
+    <div class="col-sm-4">
+        <span><b>Cédula:</b></span>
+        <input matInput type="number" readonly="readonly" class="form-control" placeholder="Cédula"
+            [(ngModel)]="empleado.ciruc">
+    </div>
+
+</div>
+<br>
+<div class="row">
+
+    <div class="col-sm-4">
+        <span><b>Dirección:</b></span>
+        <input matInput type="text" class="form-control" placeholder="Dirección" [(ngModel)]="empleado.direccion">
+    </div>
+
+    <div class="col-sm-4">
+        <span><b>Teléfono:</b></span>
+        <input matInput type="text" maxlength="10" class="form-control" placeholder="Teléfono" [(ngModel)]="empleado.telefono">
+    </div>
+
+    <div class="col-sm-4">
+        <span><b>Email:</b></span>
+        <input matInput type="text" readonly="readonly" class="form-control" placeholder="Email"
+            [(ngModel)]="empleado.email">
+    </div>
+    
+</div>
+<br>
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <span><b>Sueldo:</b></span>
+        <input matInput type="number" readonly="readonly" style="float: right;" class="form-control"
+            placeholder="Sueldo" [(ngModel)]="empleado.sueldo">
+    </div>
+
+    <div class="col-sm-4">
+        <span><b>Tipo de contrato:</b></span>
+        <select [disabled]="true" class="combobox" style="margin: 0;" [(ngModel)]="empleado.tipocontrato">
+            <option value="0">Tipo de contrato</option>
+            <option value="EVENTUAL">Eventual</option>
+            <option value="UNANIO">1 Año</option>
+            <option value="INDEFINIDO">Indefinido</option>
+        </select>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+<br>
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="btnEmpleado">
+            <button class="btn" (click)="guardar()">Guardar Cambios</button>
+        </div>
+    </div>
+    
+</div>

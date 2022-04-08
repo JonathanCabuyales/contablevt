@@ -1,0 +1,20 @@
+export interface PrefacturaI {
+    id_prefac: number,
+    id_cli: number,
+    id_usuario: number,
+    servicios_prefac: string,
+    impuesto_prefac: number,
+    neto_prefac: number,
+    total_prefac: number,
+    metodo_prefac: string,
+    convenio: number,
+    mesesatraso_prefac: number,
+    facturagenerada_prefac: string,
+    create_at: Date,
+    monto_con: number,
+    numerospagos_con: number,
+    valorpagos_con: number,
+    cuotasporpagar_con: number,
+    fechaultimopago_con: Date,
+    fechacreacion_con: Date
+}

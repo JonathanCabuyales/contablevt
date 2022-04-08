@@ -1,0 +1,10 @@
+<h3>Justificación Atraso</h3>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <input matInput type="text" class="form-control" [(ngModel)]="motivojusti" (keyup.enter)="justificar()">
+    </div>
+    <div class="col-sm-6">
+        <button class="btn" (click)="justificar()">Guardar</button>
+    </div>
+</div>

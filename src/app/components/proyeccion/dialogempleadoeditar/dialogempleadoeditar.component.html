@@ -1,0 +1,22 @@
+<h2 style="text-align: center;">Empleado</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Tipo de empleado: </b></span>
+        <input type="text" class="form-control" placeholder="Tipo de empleado" [(ngModel)]="empleadoProyeccion.empleado">
+    </div>
+    <div class="col-sm-6">
+        <span><b>Total de empleados: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Número de empleados" [(ngModel)]="empleadoProyeccion.cantidad">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <span><b>Remuneración: </b></span>
+        <input type="number" style="text-align: right;" class="form-control" placeholder="Remuneración" [(ngModel)]="empleadoProyeccion.remuneracion">
+    </div>
+    <div class="col-sm-6">
+        <br>
+       <button class="btn" (click)="agregarEmpleado()" (keyup.enter)="agregarEmpleado()">Registrar</button>
+    </div>
+</div>
