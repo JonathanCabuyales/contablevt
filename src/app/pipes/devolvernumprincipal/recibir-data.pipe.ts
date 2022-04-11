@@ -9,8 +9,10 @@ export class RecibirDataPipe implements PipeTransform {
     console.log(valor);
     let valor_enviar: any[] =[];
     for(let i=0; i < valor.length; i++){
-      console.log(i);
+      console.log(JSON.parse(valor[i].detalle));
       valor_enviar.push(...JSON.parse(valor[i].detalle));
+
+      
     }
 
     // console.log(valor.filter(r => r.cuenta_num === '1'));

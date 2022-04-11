@@ -24,6 +24,12 @@ export class MaximumService {
   }
 
 
+  getFacturaIndividual(token: any, id_asiento: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_factura_get_individual.php?token=${token}&id_asiento=${id_asiento}`);
+    return this.resultado;
+  }
+
+
   getFacturasMaximum(token: any){
     this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_factura_get.php?token=${token}`);
     return this.resultado;
@@ -53,7 +59,40 @@ export class MaximumService {
     return this.resultado;
   }
 
+  updateLibro(facturaData: any){
+    this.resultado = this._http.put(`${this.baseUrl}/maximum/maximum_factura_update.php`, JSON.stringify(facturaData));
+    return this.resultado;
+  }
 
+
+  getCuentasPrincipalesAgregar(token: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_cuentas_principales_get.php?token=${token}`);
+    return this.resultado;
+  }
+
+
+  getSubcuentas(token: any, numero: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_subcuentas_get.php?token=${token}&numero=${numero}`);
+    return this.resultado;
+  }
+  getUltimoValorSubcuenta(token: any, numero: string){
+
+    let existePunto = numero.endsWith('.');
+
+    numero = (existePunto) ? numero : numero + ".";
+    
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_cuentas_ultimo_get.php?token=${token}&numero=${numero}`);
+    return this.resultado;
+  }
+
+
+
+  //funcion para permitir la creacion de cuentas
+  insertCuentas(data: any){
+    this.resultado = this._http.post(`${this.baseUrl}/maximum/maximum_insert_cuentas_contales.php`, JSON.stringify(data));
+    return this.resultado;
+    
+  }
   /* getMovimiento(token: any){
     this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum/maximum_factura_get.php?token=${token}`);
     return this.resultado;

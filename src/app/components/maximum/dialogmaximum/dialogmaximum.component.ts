@@ -23,6 +23,14 @@ export class DialogmaximumComponent implements OnInit, AfterContentInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   mostrarLibro: any[] = [];
+
+  sumaDebeHaber = {
+    debeTotal: '',
+    HaberTotal: ''
+  }
+
+  sumaDebe: any = 0;
+  sumaHaber: any = 0;
   
   nuevoProductoServicio: ProsernuevoI;
   subtotal12: string = '0';
@@ -33,11 +41,11 @@ export class DialogmaximumComponent implements OnInit, AfterContentInit {
   token: any;
   facturaMaximum: MaximumI;
   lastIndex: number = 0;
-
+  mostrarBotonRegistrar: boolean = true;
 
   listaAgregarLibro: any[] = [];
   // listaItems: any= [];
-  
+  convertirJson: any[]= [];
   constructor(
     private _dialog: MatDialog,
     private _maximum: MaximumService,
@@ -94,12 +102,49 @@ export class DialogmaximumComponent implements OnInit, AfterContentInit {
   }
 
 
+  //funcion para activar el boton de registrar el libro
+  activarBotonLibro(botonBoolean: any){
+    this.mostrarBotonRegistrar = botonBoolean;
+    
+  }
+
+
 
 
 
   refrescarTabla(evento: any){
+    // let suma = 0;
+    
     this.mostrarLibro = evento;
-    console.log(evento);
+    console.log(this.mostrarLibro);
+    for(let i=0; i< this.mostrarLibro.length; i++){
+      this.convertirJson.push(...JSON.parse(this.mostrarLibro[i].detalle));
+
+    }
+
+    this.sumaDebe = 0;
+    this.sumaHaber = 0;
+    for(let i = 0; i <this.convertirJson.length; i++){
+
+      console.log(this.convertirJson[i].data);
+      for(let s of this.convertirJson[i].data){
+        if(s.debe_haber === 'Debe'){
+          this.sumaDebe += parseFloat(s.monto);
+        }else{
+          this.sumaHaber += parseFloat(s.monto);
+        }
+      }
+      
+      /* for(let j = 0; j < this.convertirJson[i].data.length; i++){
+        suma += parseFloat(this.convertirJson[i].data[j].monto);
+        
+      } */
+      
+    }
+
+    
+    
+  
     
     /* if(evento){
       this.ngAfterContentInit();
@@ -127,5 +172,23 @@ export class DialogmaximumComponent implements OnInit, AfterContentInit {
       
     })
   }
+
+  n_factura(evento: any){
+    console.log(evento);
+    
+    this.facturaMaximum.num_factura = evento.num_factura;
+    this.facturaMaximum.emision = evento.fecha;
+    this.facturaMaximum.tipo_comprobante = evento.tipo_comprobante;
+  }/* 
+  t_comprobante(evento: any){
+    console.log(evento);
+    
+    this.facturaMaximum.tipo_comprobante = evento;
+  }
+  fecha_factura(evento: any){
+    console.log(evento);
+    
+    this.facturaMaximum.emision = evento;
+  } */
   
 }

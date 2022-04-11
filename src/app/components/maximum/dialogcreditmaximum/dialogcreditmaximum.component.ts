@@ -6,6 +6,7 @@ import { CuentasLibroI } from 'src/app/models/cuentas/cuentas_contables';
 import { MaximumItemI } from 'src/app/models/maximum/maximum';
 import { CuentasContablesService } from 'src/app/services/cuentas/cuentas-contables.service';
 import { MaximumService } from 'src/app/services/maximum/maximum.service';
+import { DialogcreatecuentasComponent } from '../dialogcreatecuentas/dialogcreatecuentas.component';
 
 export interface Movimientos{
   id_movimiento?: string,
@@ -36,10 +37,21 @@ export class DialogcreditmaximumComponent implements OnInit {
   @Output() 
   refrescar = new EventEmitter<any>();
 
+  @Output()
+  num_factura = new EventEmitter<any>();
+  tipo_comprobante = new EventEmitter<any>();
+  fecha = new EventEmitter<any>();
+
+  @Output()
+  botonLibroE = new EventEmitter<any>();
+
+  @Output()
+  id_movimiento = new EventEmitter<any>();
+
   
   cambioCuentaPrincipalBool: boolean = false;
   item: MaximumItemI;
-  cuentasItems: any = [];
+  cuentasItems: any[] = [];
 
   cuentas_tipo: any = [];
 
@@ -49,20 +61,24 @@ export class DialogcreditmaximumComponent implements OnInit {
   agregarCuentas: any[] = [];
   lastIndex: number = 0;
   indexCuentaPrincipal: number = 0;
-  tipos = ['Debe', 'Haber'];
-
-
+  tipos = ['Debe', 'Haber', 'Parcial'];
   temporalMaximum: any []= [];
 
   lastIndexAsiento: number = 0;
+  //variable para activar el boton de registrar el libro
+  activarBotonLibro: boolean = false;
 
   //variable para cargar cuentas principales
   cargarPrincipales: any[] = [];
   
   //variable para mostrar los libros
-
   cargarLibros: any [] = [];
   mostrarOpcionesPrincipales: any[] = [];
+
+  //variable para enviar a la base de datos
+  enviarBD: any = {};
+
+  tmpIva: any[] = [];
   constructor(
     private matDialog: MatDialog,
     private _cuentas: CuentasContablesService,
@@ -162,9 +178,14 @@ export class DialogcreditmaximumComponent implements OnInit {
         debe_haber: '',
         detalle: '',
         monto: '',
-        tipo_cuenta: '',
+        tipo_cuenta: '#',
+        iva: '#'
       }
     );
+
+    this.tmpIva.push({
+      montoIva: ''
+    });
   }
   
   
@@ -287,41 +308,117 @@ export class DialogcreditmaximumComponent implements OnInit {
     
   }
 
-  enviar(){
-
-    let data = [{cuenta: this.movimiento.cuenta, fecha: this.fecha_emision_padre, data: [...this.cuentasItems]}];
+  enviar(i: any){
+    let tmpDataLibro: any[] = [];
     
-    let enviarBD = {
-      id_asiento: this.movimiento.cuenta,
-      num_factura: this.num_factura_padre,
-      tipo_comprobante: this.tipo_comprobante_padre,
-      detalle: JSON.stringify(data),
-      token: this.token
+    
+
+    console.log(this.cuentasItems);
+
+    
+    
+    console.log(this.tmpIva);
+    
+    
+    
+    
+    
+    
+    
+    this._maximum.getFacturaIndividual(this.token, this.movimiento.cuenta)
+    .subscribe((resp:any) =>{
+      for(let i = 0; i < this.cuentasItems.length; i++){
+    
+        if(this.cuentasItems[i].iva === 'iva12'){
+          console.log('entrra a iva 12');
+          
+          this.tmpIva[i].montoIva = (parseFloat(this.cuentasItems[i].monto) * 0.12).toFixed(2);
+  
+        }else{
+
+          console.log('entra a iva 0');
+          
+          this.tmpIva[i].montoIva = (parseFloat(this.cuentasItems[i].monto)).toFixed(2);
+        }
+      }
       
-    }
-
-    this._maximum.getFacturasMaximum(this.token)
-    .subscribe((resp) =>{
       console.log(resp);
+      if(resp.data.length > 0){
 
-      for(let i = 0; i <resp.data?.length; i++){
-        if(this.movimiento.cuenta === resp.data[i].id_asiento){
-          console.log(JSON.parse(resp.data[i].detalle));
-          let jsonAgregar: any[] = JSON.parse(resp.data[i].detalle);
-          
-          this.temporalMaximum.push({ data: [...this.cuentasItems]})
-          
-
-          console.log(this.temporalMaximum);
-          
+        for(let update of resp.data){
+          if(update.id_asiento === this.movimiento.cuenta){
+            console.log('existe', update);
+            let cambiarJson = JSON.parse(update.detalle);
+            console.log(update); 
+            console.log(update.detalle); 
+            for(let dataJson of cambiarJson){
+              console.log(dataJson);
+              for(let i = 0; i < this.cuentasItems.length; i++){
+                this.cuentasItems[i].monto = this.tmpIva[i].montoIva;
+              }
+              tmpDataLibro = [...dataJson.data, ...this.cuentasItems];
+              let temporalAgregar = [{
+                ...dataJson,
+                data: tmpDataLibro
+              }]
+              this.enviarBD = {
+                id_asiento: this.movimiento.cuenta,
+                num_factura: this.num_factura_padre,
+                tipo_comprobante: this.tipo_comprobante_padre,
+                detalle: JSON.stringify(temporalAgregar),
+                token: this.token
+              }
+            }
+          }
           
         }
+
+        
+
+        console.log(this.enviarBD);
+        
+        this._maximum.updateLibro(this.enviarBD)
+        .subscribe((respUpdated) =>{
+          console.log(respUpdated);
+          this.traerLibro();
+          this.botonLibroE.emit(true);
+          this.cargarCuentasPrincipales();
+          this.cuentasItems = [];
+          
+        })
+      }else{
+        for(let i=0; i< this.cuentasItems.length; i++){
+          this.cuentasItems[i].monto = this.tmpIva[i].montoIva;
+        }
+        let data = [{cuenta: this.movimiento.cuenta, fecha: this.fecha_emision_padre, data: [...this.cuentasItems]}];
+        this.enviarBD = {
+          id_asiento: this.movimiento.cuenta,
+          num_factura: this.num_factura_padre,
+          tipo_comprobante: this.tipo_comprobante_padre,
+          detalle: JSON.stringify(data),
+          token: this.token
+        }
+        this._maximum.insertFacturaMaximum(this.enviarBD)
+        .subscribe((respCreated) =>{
+          console.log(respCreated);
+          this.traerLibro();
+          this.botonLibroE.emit(true);
+          this.cargarCuentasPrincipales();
+          this.cuentasItems = [];
+          
+        })
         
       }
+
+      console.log(tmpDataLibro);
+      console.log(this.enviarBD);
+
+      
+      
       
     });
 
-    console.log(enviarBD);
+
     
   
 
@@ -350,7 +447,10 @@ export class DialogcreditmaximumComponent implements OnInit {
       console.log(resp);
     // this.mostrarOpcionesPrincipales.push(resp.data);
       this.cargarLibros = resp.data;
+
+      
       this.refrescar.emit(this.cargarLibros);
+      // this.id_movimiento.emit();
     })
   }
 
@@ -363,6 +463,43 @@ export class DialogcreditmaximumComponent implements OnInit {
       
     })
   } */
+
+  //funcion para traer la tipo_factura, numero_comprobante y fecha
+  traerFactura(evento: any){
+    let id = evento.target.value;
+    this._maximum.getFacturaIndividual(this.token, id).
+    subscribe((resp) =>{
+      console.log(resp);
+      
+      if(resp.data.length > 0){
+        this.num_factura.emit({num_factura: resp.data[0].num_factura, tipo_comprobante: resp.data[0].tipo_comprobante, fecha: JSON.parse(resp.data[0].detalle)[0].fecha});
+      }else{
+        return;
+      }
+
+      
+    })
+    // console.log(evento.target.value);
+    
+  } 
+
+  eliminar(i: any){
+    console.log(i);
+    this.cuentasItems.splice(i, 1);
+    
+  }
+
+
+  //funcion para agregar las cuentas de libro diario
+  agregarCuenta(){
+    const ref = this.matDialog.open(DialogcreatecuentasComponent, {
+      width: '50vw'
+    });
+    ref.afterClosed().subscribe((res) =>{
+      console.log(res);
+      this.cargarCuentas();
+    });
+  }
 
   
 

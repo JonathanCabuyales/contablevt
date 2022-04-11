@@ -525,6 +525,12 @@ CREATE TABLE movimiento(
   detalle TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE cuentas_principales(
+  id_cuenta_principal INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  numero TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 -- consults para sacar el vslor de la lectura, corte y reconeccion por medidor....

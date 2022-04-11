@@ -171,6 +171,9 @@ import { MaximumComponent } from './home/maximum/maximum.component';
 import { DialogcreditmaximumComponent } from './components/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 import { RecibirDataPipe } from './pipes/devolvernumprincipal/recibir-data.pipe';
 import { CuentasPipe } from './pipes/cuentasLibro/cuentas.pipe';
+import { DialogcreatecuentasComponent } from './components/maximum/dialogcreatecuentas/dialogcreatecuentas.component';
+import { PipesModule } from './pipes/pipes.module';
+
 // import { DialogcreditmaximumComponent } from './component/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 
 
@@ -275,8 +278,7 @@ import { CuentasPipe } from './pipes/cuentasLibro/cuentas.pipe';
     MaximumComponent,
     DialogmaximumComponent,
     DialogcreditmaximumComponent,
-    RecibirDataPipe,
-    CuentasPipe
+    DialogcreatecuentasComponent
     ],
   imports: [
     BrowserModule,
@@ -299,6 +301,7 @@ import { CuentasPipe } from './pipes/cuentasLibro/cuentas.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PipesModule,
     ChartsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

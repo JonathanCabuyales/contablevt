@@ -1,0 +1,34 @@
+<h2>Agregar cuenta contable</h2>
+<div class="row">
+    <div class="col">
+        <span class="spanFactura"><b>Categoria: </b></span>
+        <select class="form-select" [(ngModel)]="agregarCuentas.categoria" (change)="obtenerUltimoValor($event.target.value)">
+            <option selected disabled value="#">Categoria</option>
+            <option *ngFor="let cuenta of cuentas" [value]="cuenta.id_cuenta_principal">{{ cuenta.numero }} {{ cuenta.descripcion }}</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <span class="spanFactura">Subcuentas</span>
+        <select class="form-select" [(ngModel)]="agregarCuentas.subcuentas" (change)="cambiarNumSubcuenta()">
+            <option value="#" disabled>Seleccione..</option>
+            <option *ngFor="let subcuenta of cargarSubcuentas" [value]="subcuenta.numero" >{{ subcuenta.numero }} {{ subcuenta.descripcion }}</option>
+        </select>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col">
+        <span class="spanFactura"><b>Numero:</b></span>
+        <input class="form-control" placeholder="Numero" [(ngModel)]="agregarCuentas.numero">
+    </div>
+
+    <div class="col">
+        <span class="spanFactura"><b>Descripcion: </b></span>
+        <input class="form-control" placeholder="descripcion" (keyup.enter)="guardarCuentasLibros()" [(ngModel)]="agregarCuentas.descripcion">
+    </div>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2">
+    <button class="btn btngrabar" (click)="guardarCuentasLibros()"> Guardar</button>
+</div>
