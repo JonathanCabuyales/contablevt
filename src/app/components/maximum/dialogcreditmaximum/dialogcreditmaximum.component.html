@@ -1,23 +1,14 @@
 <h2>Cargar asiento</h2>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
-    <button class="btn btngrabar" (click)="agregarMovimiento()">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"
-            class="me-1">
-            <path d="M0 0h24v24H0V0z" fill="none" />
-            <path
-                d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-        </svg>Agregar movimiento
-    </button>
 
-</div>
 <div class="row mb-3">
 
     <!-- <div class="row mb-2"> -->
-    <div class="col d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+    <!-- <div class="col d-grid gap-2 d-md-flex justify-content-md-end mb-2">
         <button class="btn btn-primary" (click)="cargarCuentasPrincipales()">Cargar secciones</button>
-    </div>
+    </div> -->
     <div class="col">
+        <span class="spanFactura"><b>Sección:</b></span>
         <select class="form-select" (change)="traerFactura($event)" [(ngModel)]="movimiento.cuenta">
             <option selected disabled value="#">Seleccione una sección...</option>
             <option *ngFor="let principales of mostrarOpcionesPrincipales" [value]="principales.nro_asiento">{{
@@ -26,10 +17,23 @@
     </div>
 
     <div class="col">
+        <br>
         <button class="btn btn-primary" (click)="cambioCuentaPrincipal()">Agregar sección</button>
     </div>
 
 
+    <div class="col d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+        <br>
+        <button class="btn btngrabar" (click)="agregarMovimiento()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"
+                class="me-1">
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path
+                    d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+            </svg>Agregar movimiento
+        </button>
+    
+    </div>
     <!-- </div> -->
 </div>
 <div class="container">
@@ -51,20 +55,10 @@
         </ng-container>
 
         <div class="row mb-2">
-            <div class="col-sm-4">
-                <input type="text" placeholder="Monto" class="form-control" [(ngModel)]="cuentasItems[i].monto">
-            </div>
-            <div class="col-sm-6">
-                <select class="form-select" [(ngModel)]="cuentasItems[i].tipo_cuenta">
-                    <option value="#" selected disabled>Seleccione una cuenta...</option>
-                    <option *ngFor="let cuentas of cuentas_tipo"
-                        [value]="[cuentas.id_cuentas, cuentas.numero, cuentas.descripcion]">{{cuentas.numero}} {{
-                        cuentas.descripcion }}</option>
-                </select>
-            </div>
-            <div class="col-sm-2 d-grid gap-2 d-md-flex justify-content-md-start" style="justify-content: start;">
-                <button class="btn btngrabar" (click)="agregarCuenta()">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"
+            <div class="col-sm-1 d-grid gap-2 d-md-flex justify-content-md-start mt-4" style="justify-content: start;">
+                <span class="spanFactura"></span>
+                <button class="btn btngrabar" style="height: 35px;" (click)="agregarCuenta()">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 2 24 24" width="24px" fill="#FFFFFF"
                         class="me-1">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path
@@ -72,9 +66,27 @@
                     </svg>
                 </button>
             </div>
+            
+            <div class="col-sm-7">
+                <span class="spanFactura"><b>Seleccione una cuenta:</b> </span>
+                <select class="form-select" [(ngModel)]="cuentasItems[i].tipo_cuenta">
+                    <option value="#" selected disabled>Seleccione una cuenta...</option>
+                    <option *ngFor="let cuentas of cuentas_tipo"
+                        [value]="[cuentas.id_cuentas, cuentas.numero, cuentas.descripcion]">{{cuentas.numero}} {{
+                        cuentas.descripcion }}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <span class="spanFactura"><b>Monto:</b> </span>
+                <input type="text" placeholder="Monto" class="form-control" [(ngModel)]="cuentasItems[i].monto">
+            </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col" style="text-align: center;">
+                <!-- <div class=""> -->
+                <div class="row">
+                    <span class="spanFactura"><b>Cuenta:</b> </span>
+                </div>
                 <div class="form-check form-check-inline" *ngFor="let t of tipos">
                     <input class="form-check-input" type="radio" [value]="t" [name]="t + i"
                         [(ngModel)]="cuentasItems[i].debe_haber" [attr.name]="t + i" [id]="t + i">
@@ -82,15 +94,18 @@
                         {{ t }}
                     </label>
                 </div>
+                <!-- </div> -->
             </div>
             <div class="col">
+                <span class="spanFactura"><b>Detalle:</b> </span>
                 <input placeholder="Detalle" class="form-control" type="text" [(ngModel)]="cuentasItems[i].detalle">
             </div>
             <div class="col">
+                <span class="spanFactura"><b>% IVA: </b></span>
                 <select placeholder="Iva" class="form-select" [(ngModel)]="cuentasItems[i].iva">
                     <option selected disabled value="#">IVA %</option>
-                    <option value="iva12">Iva 12%</option>
-                    <option value="iva0">Iva 0%</option>
+                    <option value="iva12">IVA 12%</option>
+                    <option value="iva0">IVA 0%</option>
                 </select>
                 
             </div>

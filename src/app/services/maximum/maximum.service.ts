@@ -98,5 +98,11 @@ export class MaximumService {
     return this.resultado;
   } */
 
+  updateRegistrado(token: any, ids: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_factura_update_registro_libro1.php?ids=${ids}&token=${token}`);
+    return this.resultado;
+  }
+
+
 
 }

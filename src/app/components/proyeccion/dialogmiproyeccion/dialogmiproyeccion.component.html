@@ -134,6 +134,23 @@
                 </mat-panel-description>
             </mat-expansion-panel-header>
 
+            <div class="row">
+                <div class="col">
+                    <span class="spanFactura"><b>Fecha inicio proyecto:</b></span>
+                    <input type="date" matDate class="form-control" [(ngModel)]="fechaInicioProyecto" (change)="cambiarFecha($event)">
+                </div>
+                <div class="col">
+                    <span class="spanFactura"><b>Días trabajados:</b></span>
+                    <select class="form-select">
+                        <option value="#" selected disabled>Selecione los días..</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <br>
+                    <button class="btn" (click)="agregarActividades()">Agregar Actividades</button>
+                </div>
+            </div>
             <div class="gantt">
                 <div class="row">
                     <div class="col-sm-4">
@@ -154,33 +171,44 @@
                     <button class="btn" style="margin: 0;" (click)="addSubactividad()">Añadir Subactividad</button>
                     <br>
                     <br>
-                    <div class="row" *ngFor="let actividad of listaganttactividades; let i=index;">
-                        <div class="col-sm-3">
-                            <span style="font-size: 14px;color: #000000;"><b>Sub Actividad</b></span><br>
-                            <input type="text" class="form-control" [(ngModel)]="listaganttactividades[i].pName">
+                    <ng-container *ngFor="let actividad of listaganttactividades; let i=index;">
+                        <div class="row" >
+                            <div class="col-sm-4">
+                                <span style="font-size: 14px;color: #000000;"><b>Sub Actividad</b></span><br>
+                                <input type="text" class="form-control" [(ngModel)]="listaganttactividades[i].pName">
+                            </div>
+                            <div class="col-sm-4">
+                                <span style="font-size: 14px;color: #000000;"><b>Responsable</b></span><br>
+                                <input type="text" class="form-control" [(ngModel)]="listaganttactividades[i].pRes">
+                            </div>
+                            <div class="col-sm-2">
+                                <span style="font-size: 14px;color: #000000;"><b>Fecha De Inicio</b></span><br>
+                                <input class="form-control" id="date" type="date" [(ngModel)]="listaganttactividades[i].pStart">
+                            </div>
+                            <div class="col-sm-2">
+                                <span style="font-size: 14px;color: #000000;"><b>Fecha Fin</b></span><br>
+                                <input class="form-control" id="date" type="date" [(ngModel)]="listaganttactividades[i].pEnd">
+                            </div>
+                            
                         </div>
-                        <div class="col-sm-3">
-                            <span style="font-size: 14px;color: #000000;"><b>Responsable</b></span><br>
-                            <input type="text" class="form-control" [(ngModel)]="listaganttactividades[i].pRes">
+                        <!-- style="font-size: 17px; width: 100%; padding: 5px;" -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <span style="font-size: 14px;color: #000000;"><b>Prioridad Actividad</b></span><br>
+                                <select  class="form-select" [(ngModel)]="listaganttactividades[i].pClass">
+                                    <option value="0">Prioridad</option>
+                                    <option value="gtaskblue">Baja</option>
+                                    <option value="gtaskyellow">Media</option>
+                                    <option value="gtaskred">Alta</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-sm-2">
-                            <span style="font-size: 14px;color: #000000;"><b>Fecha De Inicio</b></span><br>
-                            <input style="font-size: 16px; width: 100%; padding: 5px;" id="date" type="date" [(ngModel)]="listaganttactividades[i].pStart">
-                        </div>
-                        <div class="col-sm-2">
-                            <span style="font-size: 14px;color: #000000;"><b>Fecha Fin</b></span><br>
-                            <input style="font-size: 16px; width: 100%; padding: 5px;" id="date" type="date" [(ngModel)]="listaganttactividades[i].pEnd">
-                        </div>
-                        <div class="col-sm-2">
-                            <span style="font-size: 14px;color: #000000;"><b>Prioridad Actividad</b></span><br>
-                            <select style="font-size: 17px; width: 100%; padding: 5px;" [(ngModel)]="listaganttactividades[i].pClass">
-                                <option value="0">Prioridad</option>
-                                <option value="gtaskblue">Baja</option>
-                                <option value="gtaskyellow">Media</option>
-                                <option value="gtaskred">Alta</option>
-                            </select>
-                        </div>
-                    </div>
+
+                    </ng-container>
+                    
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="showSubactividades">
+                    <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Guardar Actividades</button>
                 </div>
             </div>
             

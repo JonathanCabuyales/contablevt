@@ -58,7 +58,7 @@ export const environment = {
   // },
 
   // baseUrl: "https://contable.vt-proyectos.com.ec/APIVTPROYECTOS",
-  baseUrl: "http://localhost/VT/APIVTPROYECTOS",
+  baseUrl: "http://localhost/vt/APIVTPROYECTOS",
 };
 
 /*

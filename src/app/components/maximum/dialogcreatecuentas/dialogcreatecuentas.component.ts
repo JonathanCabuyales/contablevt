@@ -65,11 +65,18 @@ export class DialogcreatecuentasComponent implements OnInit {
   }
 
   obtenerUltimoValor(valor: any){
-    this._maximum.getSubcuentas(this.token, valor)
+
+    console.log(valor);
+    
+    this._maximum.getUltimoValorSubcuenta(this.token, valor)
     .subscribe((resp) =>{
       console.log(resp);
-      this.agregarCuentas.subcuentas = '#';
+      let dividirNumero = resp.data[0].numero.split(".");
+      this.agregarCuentas.numero = dividirNumero[0] + "." + (parseInt(dividirNumero[1]) + 1);
+      /* this.agregarCuentas.subcuentas = '#';
       this.cargarSubcuentas = resp.data;
+
+      this.cambiarNumSubcuenta(); */
         // this.obtenerValorSumar = resp.data[0].numero.split('.');
         // console.log(this.obtenerValorSumar);
 

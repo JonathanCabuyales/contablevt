@@ -39,6 +39,7 @@ export class DialogmiproyeccionComponent implements OnInit {
     cantidad: '',
     estado: 'NO APROBADO',
   };
+  dataGantt: any = {};
 
   // variable para el objeto de fecha
   fechas: FechasI;
@@ -116,11 +117,13 @@ export class DialogmiproyeccionComponent implements OnInit {
 
   // variables para guardar el diagrama
   listaganttgeneral: any[];
-  listaganttactividades: any[];
+  listaganttactividades: any[] = [];
   subactividad: GanttI;
 
   // variables para mostrar campos
   showSubactividades: boolean = false;
+
+  fechaInicioProyecto: string = '';
 
   constructor(
     private _cookie: CookieService,
@@ -313,7 +316,7 @@ export class DialogmiproyeccionComponent implements OnInit {
 
     // -----------------------------------------------
 
-    this.data = this.initialData();
+    // this.data = this.initialData();
 
     this.data2 = [{
       'pID': 1,
@@ -607,7 +610,7 @@ export class DialogmiproyeccionComponent implements OnInit {
     } else if (this.subactividad.pRes == '' || this.subactividad.pRes == null) {
       this.toastError("No has ingresado al responsable");
     } else {
-      this.listaganttactividades[0] = this.subactividad;
+      // this.listaganttactividades.push(this.subactividad);
       this.showSubactividades = true;
     }
 
@@ -624,7 +627,7 @@ export class DialogmiproyeccionComponent implements OnInit {
 
     console.log(this.listaganttactividades.length);
 
-    this.listaganttactividades[this.listaganttactividades.length].push({
+    this.listaganttactividades.push({
       pID: '',
       pName: '',
       pStart: '',
@@ -680,7 +683,8 @@ export class DialogmiproyeccionComponent implements OnInit {
   }
 
   initialData() {
-    return [{
+    return this.dataGantt;
+    /* [{
       'pID': 1,
       'pName': 'Inicio del proyecto',
       'pStart': '',
@@ -818,7 +822,7 @@ export class DialogmiproyeccionComponent implements OnInit {
       'pDepend': 131,
       'pCaption': '',
       'pNotes': ''
-    },
+    } */
       // {
       //   'pID': 122,
       //   'pName': 'Task Variables',
@@ -1096,7 +1100,7 @@ export class DialogmiproyeccionComponent implements OnInit {
       //   'pCaption': '',
       //   'pNotes': ''
       // }
-    ];
+    // ];
   }
 
   // -------------------------------------------------------
@@ -1129,5 +1133,103 @@ export class DialogmiproyeccionComponent implements OnInit {
       filtro = filtro.toLowerCase(); // MatTableDataSource defaults to lowercase matches
       this.datapedido.filter = filtro;
     }
+  }
+
+  // funcion para guardar las actividades
+  guardarActividades(){
+    
+    console.log(this.listaactividades);
+    console.log(this.listaganttgeneral);
+    /* {
+      'pID': 1,
+      'pName': 'Inicio del proyecto',
+      'pStart': '',
+      'pEnd': '',
+      'pClass': 'ggroupblack',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Andres',
+      'pComp': 0,
+      'pGroup': 1,
+      'pParent': 0,
+      'pOpen': 1,
+      'pDepend': '',
+      'pCaption': '',
+      'pNotes': 'Some Notes text'
+    } */
+
+    this.dataGantt = 
+    [{
+      'pID': 1,
+      'pName': this.proyeccion.informacion_pro,
+      'pStart': '',
+      'pEnd': '',
+      'pClass': 'ggroupblack',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Andres',
+      'pComp': 0,
+      'pGroup': 0,
+      'pParent': 0,
+      'pOpen': 1,
+      'pDepend': '',
+      'pCaption': '',
+      'pNotes': ''
+    },
+    {
+      'pID': 11,
+      'pName': 'Actividad 1',
+      'pStart': '2022-02-18', //fecha de inicio
+      'pEnd': '2022-02-20', // fecha de fin
+      'pClass': 'ggroupblack',  // color y forma de la barra  
+      // gtaskblue = azul, gtaskyellow = amarillo, gtaskred = rojo
+      // ggroupblack = barra negra del total
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Shlomy',
+      'pComp': 100, // porcentaje de trabajo realizado
+      'pGroup': 1, // para que se grafique la barra
+      'pParent': 1, // para unir a la actividad principal por ejemplo de la actidad 1 este se uniria a 1 
+      'pOpen': 1,
+      'pDepend': '', // para unir nodos
+      'pCaption': '',
+      'pNotes': '' // para mostrar alguna nota de ser el caso
+    },
+    {
+      'pID': 111,
+      'pName': 'Subactividad 1',
+      'pStart': '2022-02-18', //fecha de inicio
+      'pEnd': '2022-02-21', // fecha de fin
+      'pClass': 'gtaskred',  // color y forma de la barra  
+      // gtaskblue = azul, gtaskyellow = amarillo, gtaskred = rojo
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Shlomy',
+      'pComp': 100, // porcentaje de trabajo realizado
+      'pGroup': 0, // para que se grafique la barra
+      'pParent': 11, // para unir a la actividad principal por ejemplo de la actidad 1 este se uniria a 1 
+      'pOpen': 1,
+      'pDepend': '', // para unir nodos
+      'pCaption': '',
+      'pNotes': '' // para mostrar alguna nota de ser el caso
+    }]
+    
+     this.dataGantt = {
+      nombreProyecto: this.proyeccion.informacion_pro,
+      actividad: this.subactividad.pName,
+      responsable: this.subactividad.pRes,
+      subactividades: [...this.listaganttactividades]
+    };
+
+    console.log(this.dataGantt);
+
+    this.data = this.initialData();
+    
+    
+  }
+
+  // funcion para agregar las actividades
+  agregarActividades(){
+    
   }
 }

@@ -107,7 +107,7 @@
             </a>
 
             <a [routerLink]="['/home/ventas']" [routerLinkActive]="['active']"
-                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE'" title="Facturas">
+                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE' || rol == 'CONTABILIDAD'" title="Facturas">
                 <div class="option">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                         fill="#FFFFFF">
@@ -120,7 +120,7 @@
             </a>
 
             <a [routerLink]="['/home/proyeccion']" [routerLinkActive]="['active']"
-                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE'" title="Proyección">
+                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE' || rol ==='CONTABILIDAD'" title="Proyección">
                 <div class="option">
                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px"
                         viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
@@ -197,7 +197,7 @@
             </a>
 
             <a [routerLink]="['/home/clientes']" [routerLinkActive]="['active']"
-                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE'" title="Clientes">
+                *ngIf="rol == 'ADMIN' || rol == 'ASISTENTE' || rol == 'CONTABILIDAD'" title="Clientes">
                 <div class="option">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                         fill="#FFFFFF">

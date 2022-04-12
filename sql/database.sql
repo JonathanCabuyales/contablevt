@@ -531,6 +531,11 @@ CREATE TABLE cuentas_principales(
   descripcion TEXT NOT NULL,
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE proyeccion_actividades_pro(
+  id_actividad_pro INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  n
+)
+
 
 
 -- consults para sacar el vslor de la lectura, corte y reconeccion por medidor....

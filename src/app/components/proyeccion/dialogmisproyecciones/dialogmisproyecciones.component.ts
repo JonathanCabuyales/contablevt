@@ -349,4 +349,10 @@ export class DialogmisproyeccionesComponent implements OnInit {
     }
   }
 
+  // funcion para cambiar los dias trabajados en el proyecto
+  cambiarFecha(evento: any){
+    console.log(evento);
+    
+  }
+
 }

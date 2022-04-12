@@ -319,14 +319,25 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>{{ sumaDebe | number: '1.1-2': 'fr' }}</th>
-                        <th>{{ sumaHaber | number: '1.1-3': 'fr' }}</th>
+                        <th>
+                            <span *ngIf="mostrarLibro.length > 0">
+
+                                {{ sumaDebe | number: '1.1-2': 'fr' }}
+                            </span>
+                        </th>
+                        <th>
+                            <span *ngIf="mostrarLibro.length > 0">
+
+                                {{ sumaHaber | number: '1.1-3': 'fr' }}
+                            </span>
+                        </th>
+                        
                     </tr>
                 </tfoot>
             </table>
 
-            <div *ngIf="mostrarBotonRegistrar" class="d-grid gap-2 d-md-flex justify-content-md-center mb-2">
-                <button class="btn btngrabar">Registrar libro</button>
+            <div *ngIf="mostrarLibro.length > 0 " class="d-grid gap-2 d-md-flex justify-content-md-center mb-2">
+                <button class="btn btngrabar" (click)="registrarLibro()">Registrar libro</button>
             </div>
             <!-- <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="fecha">

@@ -8,7 +8,7 @@
         </select>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col">
         <span class="spanFactura">Subcuentas</span>
         <select class="form-select" [(ngModel)]="agregarCuentas.subcuentas" (change)="cambiarNumSubcuenta()">
@@ -16,11 +16,11 @@
             <option *ngFor="let subcuenta of cargarSubcuentas" [value]="subcuenta.numero" >{{ subcuenta.numero }} {{ subcuenta.descripcion }}</option>
         </select>
     </div>
-</div>
+</div> -->
 <div class="row mt-3">
     <div class="col">
         <span class="spanFactura"><b>Numero:</b></span>
-        <input class="form-control" placeholder="Numero" [(ngModel)]="agregarCuentas.numero">
+        <input class="form-control" disabled placeholder="Numero" [(ngModel)]="agregarCuentas.numero">
     </div>
 
     <div class="col">

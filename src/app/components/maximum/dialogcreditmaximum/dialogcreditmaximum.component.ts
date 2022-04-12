@@ -33,6 +33,7 @@ export class DialogcreditmaximumComponent implements OnInit {
   @Input() fecha_emision_padre: string;
   
   movimiento: Movimientos;
+  almacenarIds: any[]=[];
 
   @Output() 
   refrescar = new EventEmitter<any>();
@@ -130,8 +131,8 @@ export class DialogcreditmaximumComponent implements OnInit {
 
     this.cargarCuentas();
     // this.cargarCuentasPrincipales();
-    this.traerLibro();
-
+    // this.traerLibro();
+    this.cargarCuentasPrincipales();
     
   }
 
@@ -320,11 +321,6 @@ export class DialogcreditmaximumComponent implements OnInit {
     console.log(this.tmpIva);
     
     
-    
-    
-    
-    
-    
     this._maximum.getFacturaIndividual(this.token, this.movimiento.cuenta)
     .subscribe((resp:any) =>{
       for(let i = 0; i < this.cuentasItems.length; i++){
@@ -343,10 +339,10 @@ export class DialogcreditmaximumComponent implements OnInit {
       }
       
       console.log(resp);
-      if(resp.data.length > 0){
+      if(resp.data.length > 0 ){
 
         for(let update of resp.data){
-          if(update.id_asiento === this.movimiento.cuenta){
+          if(update.id_asiento === this.movimiento.cuenta && update.registrado === '0'){
             console.log('existe', update);
             let cambiarJson = JSON.parse(update.detalle);
             console.log(update); 
@@ -447,9 +443,11 @@ export class DialogcreditmaximumComponent implements OnInit {
       console.log(resp);
     // this.mostrarOpcionesPrincipales.push(resp.data);
       this.cargarLibros = resp.data;
-
+      for(let i=0; i< resp.data.length; i++){
+        this.almacenarIds[i] = (resp.data[i].id_movimiento);
+      }
       
-      this.refrescar.emit(this.cargarLibros);
+      this.refrescar.emit({libros: this.cargarLibros, ids: this.almacenarIds});
       // this.id_movimiento.emit();
     })
   }
