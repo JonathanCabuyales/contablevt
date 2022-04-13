@@ -12,6 +12,8 @@ import { DialogmisproyeccionesComponent } from '../dialogmisproyecciones/dialogm
 import { GanttEditorComponent, GanttEditorOptions } from 'ng-gantt';
 import { GanttI } from 'src/app/models/proyeccion/diagramagantt.interface';
 
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-dialogmiproyeccion',
@@ -41,6 +43,8 @@ export class DialogmiproyeccionComponent implements OnInit {
   };
   dataGantt: any = {};
 
+  abrirActividades: boolean = false;
+
   // variable para el objeto de fecha
   fechas: FechasI;
   fechaUpdate = {
@@ -67,13 +71,17 @@ export class DialogmiproyeccionComponent implements OnInit {
     token: '',
   };
 
+  diasTrabajados: string = '';
+
   // variable para guardar las proyecciones
   listaproyecciones: any[];
   listahojapedido: any[];
   listaactividades: any[];
+  listaActividadesPrincipales: any[] =[]
 
   lastIndex: number = 0;
-
+//variable para mostrar le boton de guardar
+  mostrarBoton: boolean = false;
   // variables para capturar los datos de la proyeccion individual
   proyeccion: any;
   codigoproceso: string = '';
@@ -87,6 +95,9 @@ export class DialogmiproyeccionComponent implements OnInit {
 
   // ------------------------------------------------
 
+
+  //variable para almacenar los dias guardados del proyecto
+  diasGuardados: any[] = [];
 
   public editorOptions: any = {};
   public data: any;
@@ -116,7 +127,7 @@ export class DialogmiproyeccionComponent implements OnInit {
 
 
   // variables para guardar el diagrama
-  listaganttgeneral: any[];
+  listaganttgeneral: any[] = [];
   listaganttactividades: any[] = [];
   subactividad: GanttI;
 
@@ -133,7 +144,7 @@ export class DialogmiproyeccionComponent implements OnInit {
   ) {
 
     this.editorOptions = new GanttEditorOptions()
-    this.data = [{
+    /* this.data = [{
       'pID': 1,
       'pName': 'Define Chart API',
       'pStart': '',
@@ -149,7 +160,7 @@ export class DialogmiproyeccionComponent implements OnInit {
       'pDepend': '',
       'pCaption': '',
       'pNotes': 'Some Notes text'
-    }];
+    }]; */
 
   }
 
@@ -198,9 +209,7 @@ export class DialogmiproyeccionComponent implements OnInit {
     //   'pCaption': '',
     //   'pNotes': '' // para mostrar alguna nota de ser el caso
 
-    this.listaganttactividades = [{
-
-    }]
+    this.listaganttactividades = []
 
     this.fechas = {
       fechaentrega: '',
@@ -224,7 +233,7 @@ export class DialogmiproyeccionComponent implements OnInit {
       this.fechaactual = anio + '-' + mes + '-' + dia;
     }
 
-    this.listaganttgeneral = []
+    this.listaganttgeneral = [];
     this.listaganttactividades = [{
       pID: '',
       pName: '',
@@ -242,6 +251,8 @@ export class DialogmiproyeccionComponent implements OnInit {
       pCaption: '',
       pNotes: ''
     }];
+
+    this.listaActividadesPrincipales = []
 
     // este objeto lo usare para guardar cada actividad principal ya que la barra debe ser distinta 
     // es decir sera una linea de color negro que contenga todas las sub actividadades
@@ -316,7 +327,7 @@ export class DialogmiproyeccionComponent implements OnInit {
 
     // -----------------------------------------------
 
-    // this.data = this.initialData();
+    this.data = this.initialData();
 
     this.data2 = [{
       'pID': 1,
@@ -601,18 +612,44 @@ export class DialogmiproyeccionComponent implements OnInit {
   }
 
 
-  crearSubactividades() {
+  crearSubactividades(j: number) {
     // esta funcion la usare para mostrar el boton de subactividades
     // se usa un booleano para mostrar o no el cuadro.
 
-    if (this.subactividad.pName == '' || this.subactividad.pName == null) {
-      this.toastError("No has registrado el nombre de la actividad principal");
-    } else if (this.subactividad.pRes == '' || this.subactividad.pRes == null) {
-      this.toastError("No has ingresado al responsable");
-    } else {
-      // this.listaganttactividades.push(this.subactividad);
-      this.showSubactividades = true;
-    }
+    
+    // for(let i=0; i<this.listaActividadesPrincipales.length; i++){
+      if (this.listaActividadesPrincipales[j].pName == '' || this.listaActividadesPrincipales[j].pName == null) {
+        this.toastError("No has registrado el nombre de la actividad principal");
+      } else if (this.listaActividadesPrincipales[j].pRes == '' || this.listaActividadesPrincipales[j].pRes == null) {
+        this.toastError("No has ingresado al responsable");
+      } else {
+        // this.listaganttactividades.push(this.subactividad);
+        this.listaActividadesPrincipales[j].pNum = j + 1;
+        
+        this.listaActividadesPrincipales[j].subactividad.push({
+          pID: this.listaActividadesPrincipales[j].pNum + '' + (this.listaActividadesPrincipales[j].subactividad.length + 1),
+          pName: '',
+          pStart: '',
+          pEnd: '',
+          pClass: '',
+          pLink: '',
+          pMile: '',
+          pRes: '',
+          pComp: '',
+          pGroup: this.listaActividadesPrincipales[j].pNum,
+          pParent: this.listaActividadesPrincipales[j].pNum,
+          pOpen: '',
+          pDepend: '',
+          pCaption: '',
+          pNotes: ''
+        });
+
+        // this.listaActividadesPrincipales[j].subactividad
+        this.mostrarBoton = true;
+        console.log(this.listaActividadesPrincipales);
+      }
+    // }
+    
 
   }
 
@@ -683,8 +720,7 @@ export class DialogmiproyeccionComponent implements OnInit {
   }
 
   initialData() {
-    return this.dataGantt;
-    /* [{
+    return [{
       'pID': 1,
       'pName': 'Inicio del proyecto',
       'pStart': '',
@@ -822,6 +858,41 @@ export class DialogmiproyeccionComponent implements OnInit {
       'pDepend': 131,
       'pCaption': '',
       'pNotes': ''
+    }
+    /* ,
+    {
+      'pID': 2,
+      'pName': 'Inicio proyecto 1',
+      'pStart': '2022-03-03',
+      'pEnd': '2022-03-13',
+      'pClass': 'gtaskblue',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Brian T.',
+      'pComp': 60,
+      'pGroup': 0,
+      'pParent': 0,
+      'pOpen': 1,
+      'pDepend': 2,
+      'pCaption': '',
+      'pNotes': ''
+    },
+    {
+      'pID': 21,
+      'pName': 'Inicio del proyecto',
+      'pStart': '',
+      'pEnd': '',
+      'pClass': 'ggroupblack',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'Andres',
+      'pComp': 0,
+      'pGroup': 2,
+      'pParent': 2,
+      'pOpen': 1,
+      'pDepend': '',
+      'pCaption': '',
+      'pNotes': 'Some Notes text'
     } */
       // {
       //   'pID': 122,
@@ -1100,7 +1171,7 @@ export class DialogmiproyeccionComponent implements OnInit {
       //   'pCaption': '',
       //   'pNotes': ''
       // }
-    // ];
+    ];
   }
 
   // -------------------------------------------------------
@@ -1138,8 +1209,8 @@ export class DialogmiproyeccionComponent implements OnInit {
   // funcion para guardar las actividades
   guardarActividades(){
     
-    console.log(this.listaactividades);
-    console.log(this.listaganttgeneral);
+    console.log(this.listaActividadesPrincipales);
+    
     /* {
       'pID': 1,
       'pName': 'Inicio del proyecto',
@@ -1216,9 +1287,8 @@ export class DialogmiproyeccionComponent implements OnInit {
     
      this.dataGantt = {
       nombreProyecto: this.proyeccion.informacion_pro,
-      actividad: this.subactividad.pName,
-      responsable: this.subactividad.pRes,
-      subactividades: [...this.listaganttactividades]
+
+      actividades: [...this.listaActividadesPrincipales]
     };
 
     console.log(this.dataGantt);
@@ -1230,6 +1300,51 @@ export class DialogmiproyeccionComponent implements OnInit {
 
   // funcion para agregar las actividades
   agregarActividades(){
+
+    this.abrirActividades = true;
+
+
+    this.listaActividadesPrincipales.push({
+      pName: '',
+      pRes: '',
+      pNum: this.listaActividadesPrincipales.length + 1,
+      pStart: '',
+      pEnd: '',
+      pClass: ''
+    });
+
+
+    
+  }
+
+  //funcion para cuando cambie la fecha
+  cambioFecha(fecha: string){
+    let fechaActual = moment();
+    let dividir = fecha.split('-');
+    let fechaUnir = dividir[0]+'-'+dividir[1]+'-'+dividir[2];
+    let fechaProyectoInicio = moment(fechaUnir);
+    let fechaDespues = moment(fechaUnir).add(parseInt(this.proyeccion.tiempo_pro), 'months');
+    
+    console.log(fechaDespues);
+    
+    console.log(fechaDespues.diff(fechaProyectoInicio, 'days'), 'dias de diferencia');
+    
+    
+    /* while(fechaProyectoInicio.isSameOrBefore(fechaDespues)){
+      console.log(fechaProyectoInicio.add(1, 'days').format('YYYY-MM-DD'));
+
+      // this.diasGuardados.push(fechaProyectoInicio.add(1, 'd'));
+      
+    } */
+
+    console.log(this.diasGuardados);
+    
+    
+
+    
+  }
+
+  agregarSubActividades(){
     
   }
 }
