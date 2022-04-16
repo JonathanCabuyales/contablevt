@@ -13,6 +13,7 @@ import { GanttEditorComponent, GanttEditorOptions } from 'ng-gantt';
 import { GanttI } from 'src/app/models/proyeccion/diagramagantt.interface';
 
 import * as moment from 'moment';
+import { CreateactividadesproyeccionComponent } from '../createactividadesproyeccion/createactividadesproyeccion.component';
 
 
 @Component({
@@ -30,6 +31,9 @@ export class DialogmiproyeccionComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   token: string = '';
+9
+  fechaMinima: any = moment().toDate().getFullYear()+'-'+((moment().toDate().getMonth() < 10 ? '0'+(moment().toDate().getMonth() + 1) : (moment().toDate().getMonth() + 1)))+ '-' + ((moment().toDate().getDate() < 10 )? '0'+moment().toDate().getDate(): moment().toDate().getDate());
+  fechaMaxima: any = '';
 
   // variables para el uso del diagrama de gantt
   // public editorOptions: GanttEditorOptions;
@@ -71,13 +75,19 @@ export class DialogmiproyeccionComponent implements OnInit {
     token: '',
   };
 
-  diasTrabajados: string = '';
+  actividadesTable: any[] = [];
+
+  diasTrabajados: number = 0;
+  fechaProyectoInicio: moment.Moment;
+  dataGrafico: any[] = [];
 
   // variable para guardar las proyecciones
   listaproyecciones: any[];
   listahojapedido: any[];
   listaactividades: any[];
-  listaActividadesPrincipales: any[] =[]
+  listaActividadesPrincipales: any[] =[];
+
+  fechaFinalProeycto: moment.Moment;
 
   lastIndex: number = 0;
 //variable para mostrar le boton de guardar
@@ -131,10 +141,14 @@ export class DialogmiproyeccionComponent implements OnInit {
   listaganttactividades: any[] = [];
   subactividad: GanttI;
 
+  listaDiasDeterminados: any[] = [];
+
   // variables para mostrar campos
   showSubactividades: boolean = false;
 
   fechaInicioProyecto: string = '';
+
+  ultimoIndexListaActividades: number = 0;
 
   constructor(
     private _cookie: CookieService,
@@ -1209,30 +1223,39 @@ export class DialogmiproyeccionComponent implements OnInit {
   // funcion para guardar las actividades
   guardarActividades(){
     
-    console.log(this.listaActividadesPrincipales);
+    // let fechaFinal = (this.fechaFinalProeycto.toDate().getDate() < 10 ) ? this.fechaFinalProeycto.toDate().getFullYear()+'-'+this.fechaFinalProeycto.toDate().getMonth()+'-0'+this.fechaFinalProeycto.toDate().getDate() : this.fechaFinalProeycto.toDate().getFullYear()+'-'+this.fechaFinalProeycto.toDate().getMonth()+'-'+this.fechaFinalProeycto.toDate().getDate();
+    // console.log(fechaFinal);
+    // console.log(`${this.fechaFinalProeycto.toDate().getFullYear()}-${ (this.fechaFinalProeycto.toDate().getMonth() < 10 )? '0'+this.fechaFinalProeycto.toDate().getMonth(): this.fechaFinalProeycto.toDate().getMonth()}-${(this.fechaFinalProeycto.toDate().getDate()<10)? '0'+this.fechaFinalProeycto.toDate().getDate() : this.fechaFinalProeycto.toDate().getDate()}`);
+    // console.log(this.fechaInicioProyecto);
     
-    /* {
-      'pID': 1,
-      'pName': 'Inicio del proyecto',
-      'pStart': '',
-      'pEnd': '',
-      'pClass': 'ggroupblack',
-      'pLink': '',
-      'pMile': 0,
-      'pRes': 'Andres',
-      'pComp': 0,
-      'pGroup': 1,
-      'pParent': 0,
-      'pOpen': 1,
-      'pDepend': '',
-      'pCaption': '',
-      'pNotes': 'Some Notes text'
-    } */
+    // console.log(this.diasTrabajados);
 
-    this.dataGantt = 
+    
+    // console.log(fechaFinalDias);
+    
+    // console.log(fechaUnir);
+
+    console.log(this.listaActividadesPrincipales);
+
+    for(let i = 0; i < this.listaActividadesPrincipales.length; i++){
+
+      let fechaTmp = moment(this.listaActividadesPrincipales[i].pStart).add(parseInt(this.listaActividadesPrincipales[i].pNum), 'days').toDate();
+      this.listaActividadesPrincipales[i].pEnd = ''+ fechaTmp.getFullYear() + '-' + (fechaTmp.getMonth()<10?'0'+(fechaTmp.getMonth()+1): (fechaTmp.getMonth()+1)) +'-'+(fechaTmp.getDate() < 10 ? '0'+fechaTmp.getDate(): fechaTmp.getDate());
+    }
+    
+    
+
+    this.data = [...this.dataGrafico, ...this.listaActividadesPrincipales]
+    
+
+    // console.log(this.data);
+    
+    // let fecha_final = moment()
+    
+   /*  this.dataGantt = 
     [{
       'pID': 1,
-      'pName': this.proyeccion.informacion_pro,
+      'pName': 'Total proyecto (días)',
       'pStart': '',
       'pEnd': '',
       'pClass': 'ggroupblack',
@@ -1291,9 +1314,9 @@ export class DialogmiproyeccionComponent implements OnInit {
       actividades: [...this.listaActividadesPrincipales]
     };
 
-    console.log(this.dataGantt);
+    console.log(this.dataGantt); */
 
-    this.data = this.initialData();
+    
     
     
   }
@@ -1301,17 +1324,89 @@ export class DialogmiproyeccionComponent implements OnInit {
   // funcion para agregar las actividades
   agregarActividades(){
 
+    let fechaFinal = this.fechaFinalProeycto.toDate();
+    this.ultimoIndexListaActividades = this.listaActividadesPrincipales.length + 1;
+
+    let fechaUnir = fechaFinal.getFullYear() + '-' + ((fechaFinal.getMonth() < 10) ? '0'+(fechaFinal.getMonth() + 1): (fechaFinal.getMonth() + 1)) + '-' + ((fechaFinal.getDate() < 10) ? '0'+fechaFinal.getDate(): fechaFinal.getDate());
+
+    let fechaFinalDias = this.fechaProyectoInicio.add(this.diasTrabajados, 'days');
+    /* for(let i=0; i < this.diasTrabajados; i++){
+      this.listaDiasDeterminados.push({valor: i + 1, texto: 'día'})
+    } */
+
     this.abrirActividades = true;
+    this.dataGrafico = [{
+      'pID': 1,
+      'pName': 'Inicio del proyecto',
+      'pStart': `${this.fechaInicioProyecto}`,
+      'pEnd': fechaUnir,
+      'pClass': 'ggroupblack',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'VT Proyectos',
+      'pComp': 100,
+      'pGroup': 1,
+      'pParent': 0,
+      'pOpen': 1,
+      'pDepend': '',
+      'pCaption': `Inicio Proyecto ${ this.proyeccion.informacion_pro }`,
+      'pNotes': ''
+    },
+    {
+      'pID': 11,
+      'pName': 'Total proyecto (días)',
+      'pStart': this.fechaInicioProyecto,
+      'pEnd': fechaFinalDias.toDate().getFullYear() + '-' + ((fechaFinalDias.toDate().getMonth() < 10) ? '0'+(fechaFinalDias.toDate().getMonth() + 1): (fechaFinalDias.toDate().getMonth() + 1)) + '-' + ((fechaFinalDias.toDate().getDate() < 10) ? '0'+fechaFinalDias.toDate().getDate(): fechaFinalDias.toDate().getDate()),
+      'pClass': 'ggroupblack',
+      'pLink': '',
+      'pMile': 0,
+      'pRes': 'VT Proyectos',
+      'pComp': 100,
+      'pGroup': 1,
+      'pParent': 1,
+      'pOpen': 1,
+      'pDepend': 1,
+      'pCaption': `Total Dias proyecto ${ this.diasTrabajados}`,
+      'pNotes': ''
+    }];
+
+    this.data = this.dataGrafico;
+
+    const ref = this.dialog.open(CreateactividadesproyeccionComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: this.proyeccion
+
+    });
+
+    ref.afterClosed().subscribe((resp) =>{
+      if(resp){
+        console.log(resp);
+
+        
+        
+      }
+    });
+
+    
 
 
-    this.listaActividadesPrincipales.push({
+    /* this.listaActividadesPrincipales.push({
       pName: '',
       pRes: '',
-      pNum: this.listaActividadesPrincipales.length + 1,
-      pStart: '',
+      pID: '11'+ this.ultimoIndexListaActividades,
+      pStart: this.fechaInicioProyecto,
       pEnd: '',
-      pClass: ''
-    });
+      pClass: '',
+      pComp: 100,
+      pGroup: 1,
+      pParent: 11,
+      pOpen: 1,
+      pDepend: 11,
+      pCaption: '',
+      pNotes: '',
+      pNum: '#'
+    }); */
 
 
     
@@ -1322,12 +1417,16 @@ export class DialogmiproyeccionComponent implements OnInit {
     let fechaActual = moment();
     let dividir = fecha.split('-');
     let fechaUnir = dividir[0]+'-'+dividir[1]+'-'+dividir[2];
-    let fechaProyectoInicio = moment(fechaUnir);
-    let fechaDespues = moment(fechaUnir).add(parseInt(this.proyeccion.tiempo_pro), 'months');
+    this.fechaProyectoInicio = moment(fechaUnir);
+    this.fechaFinalProeycto = moment(fechaUnir).add(parseInt(this.proyeccion.tiempo_pro), 'months');
     
-    console.log(fechaDespues);
+    this.fechaMaxima = this.fechaFinalProeycto.toDate().getFullYear()+'-'+(this.fechaFinalProeycto.toDate().getMonth() < 10 ? '0'+(this.fechaFinalProeycto.toDate().getMonth() + 1): (this.fechaFinalProeycto.toDate().getMonth() + 1)) + '-' + ((this.fechaFinalProeycto.toDate().getDate() < 10) ? '0'+this.fechaFinalProeycto.toDate().getDate() : this.fechaFinalProeycto.toDate().getDate());
+
+    console.log(this.fechaFinalProeycto);
     
-    console.log(fechaDespues.diff(fechaProyectoInicio, 'days'), 'dias de diferencia');
+    // console.log(fechaDespues);
+    
+    // console.log(fechaDespues.diff(fechaProyectoInicio, 'days'), 'dias de diferencia');
     
     
     /* while(fechaProyectoInicio.isSameOrBefore(fechaDespues)){
@@ -1345,6 +1444,27 @@ export class DialogmiproyeccionComponent implements OnInit {
   }
 
   agregarSubActividades(){
+
+    this.listaActividadesPrincipales.push({
+      pName: '',
+      pRes: '',
+      pID: '11'+ (this.listaActividadesPrincipales.length + 1),
+      pStart: this.fechaInicioProyecto,
+      pEnd: '',
+      pClass: '',
+      pComp: 100,
+      pGroup: 1,
+      pParent: 11,
+      pOpen: 1,
+      pDepend: 11,
+      pCaption: '',
+      pNotes: '',
+      pNum: '#'
+    });
+
+  }
+
+  cambioImg(){
     
   }
 }

@@ -533,8 +533,13 @@ CREATE TABLE cuentas_principales(
 
 CREATE TABLE proyeccion_actividades_pro(
   id_actividad_pro INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  n
-)
+  id_proyecto TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+  imgAntes TEXT,
+  imgDurante TEXT,
+  imgDespues TEXT
+  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 

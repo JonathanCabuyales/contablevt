@@ -1,0 +1,46 @@
+<h2>Agregar Actividades</h2>
+
+<div class="row">
+    <div class="col">
+        <span style="font-size: 14px;"><b>Actividad Principal</b></span>
+        <input class="form-control" type="text" [(ngModel)]="actividadPrincipal">
+    </div>
+    <div class="col">
+        <span><b>Responsable</b></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <span><b>Fecha inicio actividad</b></span>
+        <input class="form-control" type="date" [(ngModel)]="fechaActividad">
+    </div>
+    <div class="col">
+        <span><b>Días trabajados</b></span>
+        <input class="form-control" type="number" [(ngModel)]="diasTrabajados">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form>
+            <span><b>Imagen antes de actividad</b></span>
+            <input type="file" id="antes" style="display: block;" name="antes" (change)="cambioImg($event, 'antes')" accept="image/png, image/jpeg, image/jpg">
+        </form>
+    </div>
+    <div class="col">
+        <span><b>Imagen durante de actividad</b></span>
+        <input type="file" id="durante" style="display: block;" name="durante" (change)="cambioImg($event, 'durante')" accept="image/png, image/jpeg, image/jpg" >
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <span><b>Imagen después de actividad</b></span>
+        <input type="file" id="despues" style="display: block;" name="despues" (change)="cambioImg($event, 'despues')" accept="image/png, image/jpeg, image/jpg" >
+    </div>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-center" >
+    <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Registrar Actividades</button>
+</div>
+
+
+

@@ -34,10 +34,12 @@ import { ProyeccionComponent } from './home/proyeccion/proyeccion.component';
 import { VentasComponent } from './home/ventas/ventas.component';
 import { DepreciacionComponent } from './home/depreciacion/depreciacion.component';
 import { MaximumComponent } from './home/maximum/maximum.component';
+import { GanttpruebasComponent } from './pruebas/ganttpruebas/ganttpruebas.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
+  {path: 'pruebas',component: GanttpruebasComponent},
   { path: 'login', component: LoginComponent },
   { path: 'home', 
   canActivate: [UserguardGuard],
@@ -85,7 +87,8 @@ const routes: Routes = [
     { path: 'maximum', component: MaximumComponent}
     
   ]
-}
+},
+
 ];
 
 @NgModule({

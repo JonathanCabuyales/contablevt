@@ -70,4 +70,16 @@ export class ProyeccionService {
     return this.resultado;
   }
 
+  // funcion para guardar las imagenes
+  insertImg(img: File, id_pro: any){
+
+    const formData = new FormData();
+    formData.append('id_pro', id_pro);
+    formData.append('img', img);
+    // console.log(formData.get('id_pro'));
+    
+    this.resultado = this.http.post(`${this.baseUrl}/proyeccion/proyeccion_insert_actividades_img.php`, formData);
+    return this.resultado;
+  }
+
 }

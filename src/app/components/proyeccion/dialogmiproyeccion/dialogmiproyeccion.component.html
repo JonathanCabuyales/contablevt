@@ -141,15 +141,15 @@
                 </div>
                 <div class="col">
                     <span class="spanFactura"><b>Días trabajados:</b></span>
-                    <input class="form-control" [(ngModel)]="diasTrabajados" placeholder="Días Trabajados">
-                    <!-- <select class="form-select">
+                    <input type="number" class="form-control" [(ngModel)]="diasTrabajados" placeholder="Días Trabajados">
+                    <select class="form-select">
                         <option value="#" selected disabled>Selecione los días..</option>
-                    </select> -->
+                    </select>
                 </div>
 
                 <div class="col">
                     <br>
-                    <button class="btn" (click)="agregarActividades()">Registrar Actividades</button>
+                    <button class="btn" (click)="agregarActividades()">Agregar Actividades</button>
                 </div>
             </div>
             
@@ -159,7 +159,7 @@
                         <button class="btn" (click)="agregarSubActividades()">Agregar Actividades</button>
                     </div>
                 </div>
-                <ng-container *ngFor="let general of listaActividadesPrincipales; let j = index;">
+                <!-- <ng-container *ngFor="let general of listaActividadesPrincipales; let j = index;">
 
                     <div class="row" *ngIf="abrirActividades">
                         <div class="col-sm-4">
@@ -170,18 +170,26 @@
                             <span style="font-size: 14px;color: #000000;"><b>Responsable</b></span><br>
                             <input type="text" class="form-control" [(ngModel)]="listaActividadesPrincipales[j].pRes">
                         </div>
+                        <div class="col">
+                            <span style="font-size: 14px;color: #000000;"><b>Fecha De Inicio Actividad</b></span><br>
+                            <input [min]="fechaInicioProyecto" [max]="fechaMaxima" class="form-control" id="date" type="date" [(ngModel)]="listaActividadesPrincipales[j].pStart">
+                        </div>
+
+                        {{fechaMinima}}
+                        {{fechaMaxima}}
+                        
+                        <input class="form-control" id="numero" type="number" [(ngModel)]="listaActividadesPrincipales[j].pNum">
                         <div class="col-sm-2">
-                            <span style="font-size: 14px;color: #000000;"><b>Fecha De Inicio</b></span><br>
-                            <input class="form-control" id="date" type="date" [(ngModel)]="listaActividadesPrincipales[j].pStart">
+                            
                         </div>
                         <div class="col-sm-2">
                             <span style="font-size: 14px;color: #000000;"><b>Fecha Fin</b></span><br>
                             <input class="form-control" id="date" type="date" [(ngModel)]="listaActividadesPrincipales[j].pEnd">
                         </div>
-                        <!-- <div class="col-sm-4">
+                        <div class="col-sm-4">
                             <br>
                             <button class="btn" style="float: right;" (click)="crearSubactividades(j)">Crear Subactividades</button>
-                        </div> -->
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
@@ -193,9 +201,21 @@
                                 <option value="gtaskred">Alta</option>
                             </select>
                         </div>
+                        <div class="col-sm-4">
+                            <span style="font-size: 14px;color: #000000; "><b>Cantidad de días</b></span>
+                            <select class="form-select" [(ngModel)]="listaActividadesPrincipales[j].pNum">
+                                <option value="#" disabled selected>Seleccionee el día</option>
+                                <option *ngFor="let item of listaDiasDeterminados" [value]="item.valor">{{ item.texto }} {{ item.valor }}</option>
+                            </select>
+                        </div>
                     </div>
                     <br>
-                    <!-- <div style="width: 100%; height: auto; padding: 20px;">
+                    <div class="row">
+                        <div class="col">
+                            <input type="file" class="form-file" (ngModelChange)="cambioImg($event)">
+                        </div>
+                    </div>
+                    <div style="width: 100%; height: auto; padding: 20px;">
                         <button *ngIf="listaActividadesPrincipales[j].subactividad.length" class="btn" style="margin: 0;" (click)="addSubactividad()">Añadir Subactividad</button>
                         <br>
                         <br>
@@ -224,8 +244,8 @@
     
                         </ng-container>
                         
-                    </div> -->
-                </ng-container>
+                    </div>
+                </ng-container> -->
                 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="listaActividadesPrincipales.length > 0">
                     <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Guardar Actividades</button>
@@ -236,7 +256,7 @@
             <br>
             <br>
             <br>
-            <div style="height:300px; height: auto;" >
+            <div style="height:500px; height: auto;" >
 
                 <ng-gantt style="overflow-x: scroll;" [options]="editorOptions" [data]="data" #editor></ng-gantt>
 

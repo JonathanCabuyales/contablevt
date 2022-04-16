@@ -173,6 +173,8 @@ import { RecibirDataPipe } from './pipes/devolvernumprincipal/recibir-data.pipe'
 import { CuentasPipe } from './pipes/cuentasLibro/cuentas.pipe';
 import { DialogcreatecuentasComponent } from './components/maximum/dialogcreatecuentas/dialogcreatecuentas.component';
 import { PipesModule } from './pipes/pipes.module';
+import { GanttpruebasComponent } from './pruebas/ganttpruebas/ganttpruebas.component';
+import { CreateactividadesproyeccionComponent } from './components/proyeccion/createactividadesproyeccion/createactividadesproyeccion.component';
 
 // import { DialogcreditmaximumComponent } from './component/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 
@@ -278,7 +280,9 @@ import { PipesModule } from './pipes/pipes.module';
     MaximumComponent,
     DialogmaximumComponent,
     DialogcreditmaximumComponent,
-    DialogcreatecuentasComponent
+    DialogcreatecuentasComponent,
+    GanttpruebasComponent,
+    CreateactividadesproyeccionComponent
     ],
   imports: [
     BrowserModule,
