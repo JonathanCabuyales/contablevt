@@ -74,11 +74,28 @@ export class ProyeccionService {
   insertImg(img: File, id_pro: any){
 
     const formData = new FormData();
-    formData.append('id_pro', id_pro);
+    // formData.append('id_pro', id_pro);
     formData.append('img', img);
     // console.log(formData.get('id_pro'));
     
     this.resultado = this.http.post(`${this.baseUrl}/proyeccion/proyeccion_insert_actividades_img.php`, formData);
+    return this.resultado;
+  }
+
+
+  insertActividad(actividad: any){
+    this.resultado = this.http.post(`${this.baseUrl}/proyeccion/proyeccion_insert_actividades.php`, JSON.stringify(actividad));
+    return this.resultado;
+  }
+
+
+  getActividadGantt(token: any, id_pro: any){
+    this.resultado = this.http.get(`${this.baseUrl}/proyeccion/proyeccion_actividades_get.php?token=${token}&id_pro=${id_pro}`);
+    return this.resultado;
+  }
+
+  updateProyeccionActividades(actividades: any){
+    this.resultado = this.http.post(`${this.baseUrl}/proyeccion/proyeccion_update.php`, JSON.stringify(actividades));
     return this.resultado;
   }
 

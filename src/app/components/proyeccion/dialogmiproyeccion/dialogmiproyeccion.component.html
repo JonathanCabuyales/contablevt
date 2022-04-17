@@ -137,28 +137,36 @@
             <div class="row">
                 <div class="col">
                     <span class="spanFactura"><b>Fecha inicio proyecto:</b></span>
-                    <input type="date" matDate class="form-control" (ngModelChange)="cambioFecha($event)" [(ngModel)]="fechaInicioProyecto">
+                    <input type="date" [disabled]="activarAgregar" matDate class="form-control" (ngModelChange)="cambioFecha($event)" [(ngModel)]="fechaInicioProyecto">
                 </div>
                 <div class="col">
                     <span class="spanFactura"><b>Días trabajados:</b></span>
-                    <input type="number" class="form-control" [(ngModel)]="diasTrabajados" placeholder="Días Trabajados">
-                    <select class="form-select">
+                    <input type="number" [disabled]="activarAgregar" class="form-control" [(ngModel)]="diasTrabajados" placeholder="Días Trabajados">
+                    <!-- <select class="form-select">
                         <option value="#" selected disabled>Selecione los días..</option>
-                    </select>
+                    </select> -->
                 </div>
 
                 <div class="col">
                     <br>
-                    <button class="btn" (click)="agregarActividades()">Agregar Actividades</button>
+                    <button class="btn" [disabled]="activarAgregar" (click)="agregarActividades()">Registrar Actividades</button>
+                </div>
+                
+            </div>
+            <div class="row mt-2 ">
+                <div class="col-sm-4 d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button *ngIf="activarAgregar" class="btn" (click)="agregarSubActividades()">Agregar Actividades</button>
+                    <button *ngIf="activarAgregar && !activarCancelar" class="btn btncancelar" (click)="cancelar()">Cancelar</button>
+                </div>
+                <div class="col-sm-4">
+
                 </div>
             </div>
             
-            <div class="gantt mt-2" *ngIf="listaActividadesPrincipales.length > 0">
+            <!-- <div class="gantt mt-2" *ngIf="listaActividadesPrincipales.length > 0">
                 <div class="row mb-4">
-                    <div class="col">
-                        <button class="btn" (click)="agregarSubActividades()">Agregar Actividades</button>
-                    </div>
-                </div>
+                    
+                </div> -->
                 <!-- <ng-container *ngFor="let general of listaActividadesPrincipales; let j = index;">
 
                     <div class="row" *ngIf="abrirActividades">
@@ -247,10 +255,10 @@
                     </div>
                 </ng-container> -->
                 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="listaActividadesPrincipales.length > 0">
+                <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end" *ngIf="listaActividadesPrincipales.length > 0">
                     <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Guardar Actividades</button>
                 </div>
-            </div>
+            </div> -->
             
             <br>
             <br>

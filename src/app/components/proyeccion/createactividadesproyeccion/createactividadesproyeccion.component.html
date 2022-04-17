@@ -12,11 +12,12 @@
 <div class="row">
     <div class="col">
         <span><b>Fecha inicio actividad</b></span>
-        <input class="form-control" type="date" [(ngModel)]="fechaActividad">
+        <input class="form-control" [max]="fechaMax" [min]="fechaMin" type="date" [(ngModel)]="fechaActividad">
     </div>
     <div class="col">
         <span><b>Días trabajados</b></span>
         <input class="form-control" type="number" [(ngModel)]="diasTrabajados">
+        <small>Días restantes: {{restaDiasTrabajados}}</small>
     </div>
 </div>
 <div class="row">
@@ -38,8 +39,8 @@
     </div>
 </div>
 
-<div class="d-grid gap-2 d-md-flex justify-content-md-center" >
-    <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Registrar Actividades</button>
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mt-2" >
+    <button class="btn btnasiganr" type="button" (click)="guardarActividades()">Guardar Actividades</button>
 </div>
 
 
