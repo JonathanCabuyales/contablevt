@@ -1498,9 +1498,16 @@ export class DialogmiproyeccionComponent implements OnInit, AfterContentInit{
 
   getActividadesGannt(){
     let fechaFinal: any;
-    if(this.proyeccion.fechaStart !== ''){
+    console.log(this.proyeccion);
+    
+    if((this.proyeccion.fechaStart != '' && this.proyeccion.diasTrabajados != '')){
+
+      console.log('intenta entrar aqui');
+      
+      console.log(this.proyeccion.diastotales);
+      
       this.fechaFinalProeycto = moment(this.proyeccion.fechaStart).add(parseInt(this.proyeccion.diastotales), 'days');
-      console.log(this.fechaFinalProeycto);
+      // console.log(this.fechaFinalProeycto);
       
       fechaFinal = this.fechaFinalProeycto.toDate();
       this.ultimoIndexListaActividades = this.listaActividadesPrincipales.length + 1;
@@ -1516,8 +1523,15 @@ export class DialogmiproyeccionComponent implements OnInit, AfterContentInit{
 
       this.activarAgregar = true;
       this.activarCancelar = true;
+      console.log(this.fechaProyectoInicio);
+      
       
       let fechaFinalDias = this.fechaProyectoInicio.add(parseInt(this.proyeccion.diasTrabajados), 'days');
+
+      console.log(fechaFinalDias, this.fechaInicioProyecto);
+
+      let fechaUnirFinal = fechaFinalDias.toDate().getFullYear() + '-' + ((fechaFinalDias.toDate().getMonth() < 10) ? '0'+(fechaFinalDias.toDate().getMonth() + 1): (fechaFinalDias.toDate().getMonth() + 1)) + '-' + ((fechaFinalDias.toDate().getDate() < 10) ? '0'+fechaFinalDias.toDate().getDate(): fechaFinalDias.toDate().getDate());
+      
       this.dataGrafico = [{
         'pID': 1,
         'pName': 'Inicio del proyecto',
@@ -1539,7 +1553,7 @@ export class DialogmiproyeccionComponent implements OnInit, AfterContentInit{
         'pID': 11,
         'pName': 'Total proyecto (días)',
         'pStart': this.fechaInicioProyecto,
-        'pEnd': fechaFinalDias.toDate().getFullYear() + '-' + ((fechaFinalDias.toDate().getMonth() < 10) ? '0'+(fechaFinalDias.toDate().getMonth() + 1): (fechaFinalDias.toDate().getMonth() + 1)) + '-' + ((fechaFinalDias.toDate().getDate() < 10) ? '0'+fechaFinalDias.toDate().getDate(): fechaFinalDias.toDate().getDate()),
+        'pEnd': fechaUnirFinal,
         'pClass': 'ggroupblack',
         'pLink': '',
         'pMile': 0,
@@ -1550,7 +1564,7 @@ export class DialogmiproyeccionComponent implements OnInit, AfterContentInit{
         'pOpen': 1,
         'pDepend': 1,
         'pCaption': `Total Dias proyecto ${ this.proyeccion.diasTrabajados}`,
-        'pNotes': ''
+        'pNotes': `Total Dias proyecto ${ this.proyeccion.diasTrabajados}`
       }];
 
       this.showGantt();

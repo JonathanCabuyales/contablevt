@@ -35,6 +35,7 @@ export class FirmasdashComponent implements OnInit {
     this.firmas = [];
 
     this._firmas.getAll(this.token).subscribe(res => {
+      console.log(res);
       
       let totalFirmas = '0';
       for (let i = 0; i < res.data.length; i++) {

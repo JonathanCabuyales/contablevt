@@ -257,7 +257,7 @@ export class DialogcreditmaximumComponent implements OnInit {
   cambioCuentaPrincipal(){
     this._maximum.getPrincipalesCuentas(this.token)
     .subscribe((resp) =>{
-      // console.log(resp.data[0].nro_asiento);
+      console.log(resp.data);
       
       if(resp.data?.length === 0){
         this.mostrarOpcionesPrincipales = [];
@@ -276,7 +276,7 @@ export class DialogcreditmaximumComponent implements OnInit {
         }
       }
       console.log(this.mostrarOpcionesPrincipales);
-      /* this._maximum.verifciarDatosJWT(this.token)
+      this._maximum.verifciarDatosJWT(this.token)
       .subscribe((respUser) =>{
         console.log(respUser);
 
@@ -286,7 +286,7 @@ export class DialogcreditmaximumComponent implements OnInit {
           
         })
         
-      }); */
+      });
       
       
     });
@@ -464,7 +464,7 @@ export class DialogcreditmaximumComponent implements OnInit {
 
   //funcion para traer la tipo_factura, numero_comprobante y fecha
   traerFactura(evento: any){
-    let id = evento.target.value;
+    /* let id = evento.target.value;
     this._maximum.getFacturaIndividual(this.token, id).
     subscribe((resp) =>{
       console.log(resp);
@@ -476,7 +476,7 @@ export class DialogcreditmaximumComponent implements OnInit {
       }
 
       
-    })
+    }) */
     // console.log(evento.target.value);
     
   } 
@@ -498,6 +498,18 @@ export class DialogcreditmaximumComponent implements OnInit {
       this.cargarCuentas();
     });
   }
+
+
+  //funcion para agregar una nueva session
+  /**
+   * Limpiar tipo de comprobante,
+   * num de comprobante,
+   * fecha comprobante
+   * **/
+   agregarSeccion(){
+     console.log('agregar nueva seccion');
+     
+   }
 
   
 

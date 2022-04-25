@@ -1,3 +1,4 @@
+
 <h3>Proyecciones</h3>
 
 <mat-tab-group animationDuration="1000ms" [selectedIndex]="active" (selectedIndexChange)="onTabChange($event)">
@@ -12,6 +13,10 @@
 
     <mat-tab label="Proyecciones Registradas" *ngIf="rol == 'ADMIN'">
         <app-diagloproyecciones #proyecciones></app-diagloproyecciones>
+    </mat-tab>
+
+    <mat-tab label="Consultar Secop" *ngIf="rol =='ADMIN'">
+        <app-dialogsecop #consultas></app-dialogsecop>
     </mat-tab>
     
 </mat-tab-group>

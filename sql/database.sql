@@ -542,6 +542,45 @@ CREATE TABLE proyeccion_actividades_pro(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+CREATE TABLE sub_cuentas_contables(
+  id_subcuenta INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cod TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+  padre TEXT NOT NULL,
+  tipo TEXT NOT NULL,
+  valor TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DE FAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+/* CREATE TABLE registro_no_presupuestarias(
+  id_subcuenta INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cod TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+  padre TEXT NOT NULL,
+  tipo TEXT NOT NULL,
+  valor TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; */
+
+
+CREATE TABLE anexos_grupos(
+  id_grupo_anexos INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombre TEXT NOT NULL,
+  tipo_transaccion TEXT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE anexos(
+  id_anexos INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cod TEXT NOT NULL,
+  nombre TEXT NOT NULL,
+  registro_no_presupuestarias TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 
 -- consults para sacar el vslor de la lectura, corte y reconeccion por medidor....
 -- -- **************  LECTURAS  ****************

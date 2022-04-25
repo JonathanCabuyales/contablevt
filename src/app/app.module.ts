@@ -175,6 +175,8 @@ import { DialogcreatecuentasComponent } from './components/maximum/dialogcreatec
 import { PipesModule } from './pipes/pipes.module';
 import { GanttpruebasComponent } from './pruebas/ganttpruebas/ganttpruebas.component';
 import { CreateactividadesproyeccionComponent } from './components/proyeccion/createactividadesproyeccion/createactividadesproyeccion.component';
+import { DialogsecopComponent } from './components/proyeccion/dialogsecop/dialogsecop.component';
+import { DialogcreateasientoscontComponent } from './components/maximum/dialogcreateasientoscont/dialogcreateasientoscont.component';
 
 // import { DialogcreditmaximumComponent } from './component/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 
@@ -282,7 +284,9 @@ import { CreateactividadesproyeccionComponent } from './components/proyeccion/cr
     DialogcreditmaximumComponent,
     DialogcreatecuentasComponent,
     GanttpruebasComponent,
-    CreateactividadesproyeccionComponent
+    CreateactividadesproyeccionComponent,
+    DialogsecopComponent,
+    DialogcreateasientoscontComponent
     ],
   imports: [
     BrowserModule,
