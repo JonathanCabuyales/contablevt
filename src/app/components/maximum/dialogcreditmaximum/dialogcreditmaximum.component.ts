@@ -437,7 +437,7 @@ export class DialogcreditmaximumComponent implements OnInit {
 
   //funcion para traer los datos del libro
   traerLibro(){
-    this.mostrarOpcionesPrincipales = [];
+    /* this.mostrarOpcionesPrincipales = [];
     this._maximum.getFacturasMaximum(this.token)
     .subscribe((resp) =>{
       console.log(resp);
@@ -449,7 +449,7 @@ export class DialogcreditmaximumComponent implements OnInit {
       
       this.refrescar.emit({libros: this.cargarLibros, ids: this.almacenarIds});
       // this.id_movimiento.emit();
-    })
+    }) */
   }
 
 

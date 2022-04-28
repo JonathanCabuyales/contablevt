@@ -63,9 +63,9 @@ if(!empty($validarVigencia)){
 }
 
 if (!empty($firmaFactura)) {
-    
+    // var_dump($firmaFactura)
     $validarComprobante = $firmaFactura[0];
-    $autorizacionComprobante = $firmaFactura[1];
+    // $autorizacionComprobante = $firmaFactura[1];
     
     var_dump($validarComprobante);
     var_dump($autorizacionComprobante);

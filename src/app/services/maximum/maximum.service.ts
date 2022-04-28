@@ -30,7 +30,7 @@ export class MaximumService {
   }
 
 
-  getFacturasMaximum(token: any){
+  getCuentasContables(token: any){
     this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_factura_get.php?token=${token}`);
     return this.resultado;
   }

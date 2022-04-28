@@ -57,8 +57,8 @@
     //   measurementId: "G-QGQDJQX0RV"
     // },
 
-    baseUrl: "https://contable.vt-proyectos.com.ec/APIVTPROYECTOS"
-    // baseUrl: "http://localhost/vt/APIVTPROYECTOS",
+    // baseUrl: "https://contable.vt-proyectos.com.ec/APIVTPROYECTOS"
+    baseUrl: "http://localhost/vt/APIVTPROYECTOS",
   };
 
   /*

@@ -12,6 +12,8 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
         respuesta = respuesta.data.text;
         
 
+        console.log(respuesta);
+
         
         window.contenido_comprobante = respuesta;
 		
@@ -29,6 +31,8 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
             var comprobanteFirmado_xml = firmarComprobante(window.contenido_p12[0],
                     pwd_p12,
                     window.contenido_comprobante,token);
+            
+                    // console.log(comprobanteFirmado_xml);
 
             $.ajax({
                 url: "http://localhost/VT/APIVTPROYECTOS/libreria_2021/src/firma.php",
@@ -38,6 +42,8 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
                 },
                 context: document.body
             }).done(function (respuesta) {
+
+                console.log(respuesta);
 
                 service = 'Validar Comprobante';
                 xmlDoc = $.parseXML(window.contenido_comprobante),
@@ -52,12 +58,16 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
                     context: document.body
                 }).done(function (respuestaValidarComprobante) {
 
+
+                    console.log(respuestaValidarComprobante);
                     
                     respuesta = decodeURIComponent(respuestaValidarComprobante);
                     respuesta = respuesta.toString();
+                    console.log(respuesta);
                     var validar_comprobante = respuestaValidarComprobante;
                 
                     if (/RECIBIDA/i.test(respuesta) || /CLAVE ACCESO REGISTRADA/i.test(respuesta)) {
+                        console.log('comprobante autorizado');
                         service = 'Autorizacion Comprobante';
                         xmlDoc = $.parseXML(window.contenido_comprobante),
                                 $xml = $(xmlDoc),
@@ -70,6 +80,7 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
                             },
                             context: document.body
                         }).done(function (respuestaAutorizacionComprobante) {
+                            console.log(respuestaAutorizacionComprobante);
                             
                             var autorizacion_comprobante = respuestaAutorizacionComprobante;
                             response[0] = validar_comprobante;
@@ -81,6 +92,8 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
                                 context: document.body
                             }).done(function (respuesta) {
                                 //Respuesta enviada
+                                console.log(respuesta);
+
                             });
 
                         });
@@ -93,6 +106,8 @@ function obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta
                             context: document.body
                         }).done(function (respuesta) {
                             //Respuesta enviada
+
+                            console.log(respuesta);
                         });
                     }
                     console.log(validar_comprobante);
@@ -292,7 +307,7 @@ function firmarComprobante(mi_contenido_p12, mi_pwd_p12, comprobante,token) {
         },
         context: document.body
     }).done(function (respuesta) {
-
+        console.log(respuesta);
     });
 
     var pkcs8bags = p12.getBags({bagType: forge.pki.oids.pkcs8ShroudedKeyBag});

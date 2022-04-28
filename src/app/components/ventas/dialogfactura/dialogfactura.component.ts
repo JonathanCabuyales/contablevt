@@ -17,6 +17,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { FacturaelectronicaService } from 'src/app/services/facturaelectronica/facturaelectronica.service';
 import { FacturaelectronicaI } from 'src/app/models/facturaelectronica/facturaelectronica.interface';
 import { $ } from 'protractor';
+import { Observable } from 'rxjs';
 
 
  // variable para llamar a la libreria
@@ -473,17 +474,14 @@ export class DialogfacturaComponent implements OnInit {
         
         // console.log(this.facturaelec);
         // debes cambiar la ruta para entrar al p12
-        var ruta_certificado = "http://localhost:4200/assets/libreria_2021/DAISY FERNANDA CAIZA TIPAN 290921160443.p12";
+        var ruta_certificado = "http://localhost/libreria_2021/DAISY FERNANDA CAIZA TIPAN 290921160443.p12";
         var pwd_p12 = "Caizad2021";
         var ruta_respuesta = "http://localhost/VT/APIVTPROYECTOS/libreria_2021/example.php";
         var ruta_factura = "http://localhost/VT/APIVTPROYECTOS/libreria_2021/xmlgenerados/"+res.data.claveacceso+".xml";
         var token = this.token;
 
         // esta seccion debes descomentar para la factura
-        obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta, ruta_factura,token).subscribe(res=>{
-          console.log(res);
-          
-        });
+        obtenerComprobanteFirmado_sri(ruta_certificado, pwd_p12, ruta_respuesta, ruta_factura,token);
         res.token = this.token;
         
 
