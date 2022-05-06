@@ -424,7 +424,7 @@ export class DialogfacturaComponent implements OnInit {
         //  PASAPORTE 06 Obligatorio
         //  VENTA A CONSUMIDOR FINAL* 07 Obligatorio
         //  IDENTIFICACION DELEXTERIOR* 08 Obligatorio
-      if (this.cliente.ciruc_cli.length == 13) {
+      if (this.cliente.ciruc_cli.length == 1*3) {
 
         if (this.cliente.ciruc_cli == '9999999999999') {
           this.facturaelec.tipoidentificacion = '07';

@@ -339,7 +339,9 @@ export class DialogsueldoempleadoComponent implements OnInit {
           this.showSueldo = false;
 
           this._sueldo.createSueldo(this.sueldo).subscribe(res => {
+            console.log(res);
             if (res.data) {
+              
               this.cancelar();
               this.toastSuccess("grabado");
 
