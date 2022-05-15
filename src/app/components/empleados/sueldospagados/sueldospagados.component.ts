@@ -160,7 +160,8 @@ export class SueldospagadosComponent implements OnInit {
       
 
       this._sueldo.getSueldosMes(this.fecha, this.token).subscribe(res => {
-
+        console.log(res);
+        
         if (res.data.length) {
           this.listaRoles = res.data;
           
@@ -188,9 +189,9 @@ console.log(rol);
       title: 'ROL DE PAGOS ' + rol.nombres + ' ' + rol.apellidos
     });
     pdf.add(new Txt('\n').end);
-    pdf.add((await new Img('../../../assets/img/VTSESION.png').relativePosition(400, 75).height('100').width('100').build()));
+    pdf.add((await new Img('../../../assets/maximum logo.png').relativePosition(400, 75).height('100').width('200').build()));
     pdf.add(new Table([
-      [{ text: 'ROL DE PAGOS VT PROYECTOS', bold: true, fontSize: 20 }, '']
+      [{ text: 'ROL DE PAGOS MAXIMUMSECURITY', bold: true, fontSize: 20 }, '']
     ]).layout('noBorders').alignment('center').fontSize(10).widths(['78%', '22%']).end);
     pdf.add(new Txt('\n\n\n\n').end);
     pdf.add(new Table([
@@ -205,11 +206,11 @@ console.log(rol);
 
     
     pdf.add(new Table([
-      [{ text: 'Apellidos:', bold: true }, rol.apellidos, '', { text: 'Periodo:', bold: true }, { text: `${obtener_mes} - ${ this.anioreporte }` }]
+      [{ text: 'Apellidos:', bold: true }, rol.apellidos, '', { text: 'Periodo:', bold: true }, { text: `ABRIL - 2022` }]
     ]).layout('noBorders').fontSize(11).widths(['15%', '25%', '25%', '20%', '15%']).end);
 
     pdf.add(new Table([
-      [{ text: 'Nombres:', bold: true }, rol.nombres, '', { text: 'Días trabajados:', bold: true }, { text: `${calcular_dias.getDate()}` }]
+      [{ text: 'Nombres:', bold: true }, rol.nombres, '', { text: 'Días trabajados:', bold: true }, { text: `30` }]
     ]).layout('noBorders').fontSize(11).widths(['15%', '25%', '25%', '20%', '15%']).end);
 
     pdf.add(new Table([
@@ -281,11 +282,11 @@ console.log(rol);
       ]).fontSize(11).widths(['25%', '25%', '25%', '25%']).layout('noBorders').end);
     }
     
-    if (rol.otrosingresos !== '0' || rol.otrosingresos === '0') {
+    /* if (rol.otrosingresos !== '0' || rol.otrosingresos === '0') {
       pdf.add(new Table([
         [{ text: 'Fondos de reserva 8.33%:', bold: true }, { text: (rol.sueldo * 0.0833).toFixed(2) + ' $', alignment: 'right'}, '', '']
       ]).fontSize(11).widths(['25%', '25%', '25%', '25%']).layout('noBorders').end);
-    }
+    } */
 
     /* if(rol.otrosegresos !== '0'){
       pdf.add(new Table([
@@ -296,12 +297,12 @@ console.log(rol);
 
     pdf.add(new Txt('\n\n').end);
 
-    let calcular_sueldo = (parseFloat(rol.sueldo) + (parseFloat(rol.sueldo) * 0.0833) - parseFloat(rol.iessindividual)).toFixed(2);
+    let calcular_sueldo = (parseFloat(rol.sueldo) - parseFloat(rol.iessindividual)).toFixed(2);
     let calcular_ingresos = (parseFloat(rol.sueldo) + (parseFloat(rol.sueldo) * 0.0833)).toFixed(2);
 
     if(rol.totalingresos !== '0'){
       pdf.add(new Table([
-        [{ text: 'Total Ingresos: ', bold: true}, { text: calcular_ingresos + ' $' ,bold: true, alignment: 'right'}, { text: 'Total Egresos: ', bold: true}, { text: rol.total_egresos + ' $' ,bold: true, alignment: 'right'}]
+        [{ text: 'Total Ingresos: ', bold: true}, { text: 1200 + ' $' ,bold: true, alignment: 'right'}, { text: 'Total Egresos: ', bold: true}, { text: rol.iessindividual + ' $' ,bold: true, alignment: 'right'}]
       ]).fontSize(11).widths(['25%','25%','25%','25%']).layout('noBorders').end);
     }
 

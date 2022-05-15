@@ -38,6 +38,9 @@ export class DialogcomprasComponent implements OnInit {
   ice: number = 0;
   propina: number = 0;
   totalFactura: string = '0';
+  empresasSelect: any[] = ['LAME', 'VT', 'MAXIMUM', 'FUNDACION']; 
+
+  selectEmpresa: any = '0';
 
   // variables para mostrar botones
   showbtnFactura: boolean = false;
@@ -49,7 +52,7 @@ export class DialogcomprasComponent implements OnInit {
   proveedor: ProveedorI;
 
   // variable para el token
-  token: string = '';
+token: string = '';
 
   // lista para cargar empresas
   listaempresas: any[];
@@ -112,6 +115,9 @@ export class DialogcomprasComponent implements OnInit {
     this.listaItems = [];
     this.listaempresas = [];
 
+
+    // console.log(this.selectEmpresa);
+    
 
   }
 
@@ -433,6 +439,10 @@ export class DialogcomprasComponent implements OnInit {
     this.toastr.success(mensaje, 'Exito', {
       timeOut: 3000,
     });
+  }
+
+  cambioValorEmpresa(valor: string){
+    this.selectEmpresa = valor;
   }
 
 }

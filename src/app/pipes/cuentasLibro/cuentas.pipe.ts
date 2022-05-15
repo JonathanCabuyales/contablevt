@@ -1,31 +1,32 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { MaximumService } from 'src/app/services/maximum/maximum.service';
 
 @Pipe({
   name: 'cuentas'
 })
 export class CuentasPipe implements PipeTransform {
   tmpCuentas: any [] = [];
+
+  constructor(private _maximum: MaximumService){}
   transform(value: any) {
+    
     console.log(value);
-
-    for(let i = 0; i < value.length; i ++){
-      console.log(value[i]);
-
-      let dividirTexto = value[i].tipo_cuenta.split(',');
-      console.log(dividirTexto);
-      
-      this.tmpCuentas.push({...value[i], tipo_cuenta: dividirTexto})
-      
-      
-      
+    console.log(JSON.parse(value));
+    for(let i=0; i< JSON.parse(value).length; i++){
+      this._maximum.getCuentasByAnexos(JSON.parse(value)[i])
+      .subscribe((resp) =>{
+        this.tmpCuentas.push(...resp.data);
+      })
     }
-
+    
     console.log(this.tmpCuentas);
     
-
-    return this.tmpCuentas;
     
-    // return null;
+    
+
+    // return this.tmpCuentas;
+    
+    return this.tmpCuentas;
   }
 
 }

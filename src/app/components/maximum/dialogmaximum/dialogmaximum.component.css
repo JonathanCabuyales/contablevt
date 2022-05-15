@@ -1,3 +1,11 @@
 .float{
     transition: all 1s ease;
   }
+
+.izquierda{
+  text-align: start;
+}
+
+.derecha{
+  text-align: end;
+}

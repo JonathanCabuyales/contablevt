@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CreatereportmaximumComponent } from 'src/app/components/maximum/createreportmaximum/createreportmaximum.component';
 
 @Component({
   selector: 'app-maximum',
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaximumComponent implements OnInit {
 
+  @ViewChild('reporte', { static: false }) reporte: CreatereportmaximumComponent;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onTabChange(e: any){
+
+    if(e == 1){
+      this.reporte.ngOnInit();
+    }
     
   }
 

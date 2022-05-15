@@ -72,7 +72,7 @@ export class DialogrolpagosusuarioComponent implements OnInit {
     pdf.add(new Txt('\n').end);
     pdf.add((await new Img('../../../assets/img/VTSESION.png').relativePosition(400, 75).height('100').width('100').build()));
     pdf.add(new Table([
-      [{ text: 'ROL DE PAGOS VT PROYECTOS', bold: true, fontSize: 20 }, '']
+      [{ text: 'ROL DE PAGOS MAXIMUMSECURITY', bold: true, fontSize: 20 }, '']
     ]).layout('noBorders').alignment('center').fontSize(10).widths(['78%', '22%']).end);
     pdf.add(new Txt('\n\n\n\n').end);
     pdf.add(new Table([

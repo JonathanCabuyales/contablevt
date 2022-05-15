@@ -1,0 +1,84 @@
+<div class="tituloFactura">
+    <div class="row">
+        <div class="col">
+            <button class="btn btnagregar" type="button" value="Descargar Reporte" (click)="descargarPDF()">Descargar Reporte</button>
+        </div>
+    </div>
+    <h2>Reporte Cuentas Contables</h2>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                Fecha
+            </b>
+        </div>
+        <div class="col-md-2">
+            <b>
+                Codigo
+            </b>
+        </div>
+        <div class="col-md-5">
+            <b>Descripcion</b>
+        </div>
+        <div class="col">
+            <b>Deudor</b>
+        </div>
+        <div class="col">
+            <b>Acreedor</b>
+        </div>
+    </div>
+    <div class="row" *ngFor="let cuenta of mostrarCuentasLibro">
+        <div class="col-md-2">
+            {{cuenta.fecharegistro}}
+        </div>
+        <div class="col">
+            <div class="row" *ngFor="let item of cuenta.anexos">
+                <div class="col-md-2 mt-2">{{ item.cod }}</div>
+                <div class="col-md-6 mt-2">{{ item.descripcion }}</div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="text-align: center;" *ngIf="item.tipo === 'D'">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    {{ item.valor }}
+                                </div>
+                            </div>
+                        </div>
+                        <div></div>
+                        <div class="col" style="text-align: center;" *ngIf="item.tipo === 'C'">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-md-6 col-sm-6">
+                                    {{item.valor}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    
+    <!-- <table mat-table #table [dataSource]="dataSource.anexos">
+        <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let row"> {{row.column}} </td>
+        </ng-container>
+        <ng-container matColumnDef="detalle">
+            <th mat-header-cell *matHeaderCellDef> Detalle </th>
+            <td mat-cell *matCellDef="let row"> {{row.column}} </td>
+        </ng-container>
+        <ng-container matColumnDef="deudor">
+            <th mat-header-cell *matHeaderCellDef> Deudor </th>
+            <td mat-cell *matCellDef="let row"> {{row.column}} </td>
+        </ng-container>
+        <ng-container matColumnDef="acreedor">
+            <th mat-header-cell *matHeaderCellDef> Acreedor </th>
+            <td mat-cell *matCellDef="let row"> {{row.column}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+    </table> -->
+</div>

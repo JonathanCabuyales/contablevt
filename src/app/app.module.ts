@@ -177,6 +177,11 @@ import { GanttpruebasComponent } from './pruebas/ganttpruebas/ganttpruebas.compo
 import { CreateactividadesproyeccionComponent } from './components/proyeccion/createactividadesproyeccion/createactividadesproyeccion.component';
 import { DialogsecopComponent } from './components/proyeccion/dialogsecop/dialogsecop.component';
 import { DialogcreateasientoscontComponent } from './components/maximum/dialogcreateasientoscont/dialogcreateasientoscont.component';
+import { DialoglameComponent } from './lame/dialoglame/dialoglame/dialoglame.component';
+import { DialogvtcomprasComponent } from './vt/dialogvtcompras/dialogvtcompras/dialogvtcompras.component';
+import { DialogmaximumcomprasComponent } from './maximum/dialogmaximumcompras/dialogmaximumcompras/dialogmaximumcompras.component';
+import { DialofundacioncomprasComponent } from './fundacion/dialogfundacioncompras/dialofundacioncompras/dialofundacioncompras.component';
+import { CreatereportmaximumComponent } from './components/maximum/createreportmaximum/createreportmaximum.component';
 
 // import { DialogcreditmaximumComponent } from './component/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 
@@ -286,7 +291,12 @@ import { DialogcreateasientoscontComponent } from './components/maximum/dialogcr
     GanttpruebasComponent,
     CreateactividadesproyeccionComponent,
     DialogsecopComponent,
-    DialogcreateasientoscontComponent
+    DialogcreateasientoscontComponent,
+    DialoglameComponent,
+    DialogvtcomprasComponent,
+    DialogmaximumcomprasComponent,
+    DialofundacioncomprasComponent,
+    CreatereportmaximumComponent
     ],
   imports: [
     BrowserModule,

@@ -35,6 +35,47 @@ export class MaximumService {
     return this.resultado;
   }
 
+  getCuentasByNivel1(nivel1: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/getByNivel1.php?buscar=${nivel1}`);
+    return this.resultado;
+  }
+  
+  
+  getCuentasByText(text: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_buscar_cuentas.php?buscar=${text}`);
+    return this.resultado;
+    
+  }
+  /* getCuentasByAnexos(text: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_buscar_cuentas.php?buscar=${text}`);
+    return this.resultado;
+    
+  } */
+
+  getCuentasRegistradas(){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_get_cuentas_registradas.php`);
+    return this.resultado;
+  }
+
+  updateValor(valor: any, id_cuenta: any){
+    this.resultado = this._http.post(`${this.baseUrl}/maximum/maximum_insert_valor_cuenta.php`, JSON.stringify({valor, id_cuenta}));
+    return this.resultado;
+  }
+
+  getCuentasByAnexos(valor: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_buscar_by_grupo.php?buscar=${valor}`);
+    return this.resultado;
+  }
+  getCuentasByCuentas(valor: any){
+    this.resultado = this._http.get(`${this.baseUrl}/maximum/maximum_buscar_by_cuentas.php?buscar=${valor}`);
+    return this.resultado;
+  }
+
+
+  insertFechaCuenta(id_cuenta: any, fecha: any){
+    this.resultado = this._http.post(`${this.baseUrl}/maximum/maximum_insert_fecha_cuentas.php`, JSON.stringify({id_cuenta, fecha}));
+    return this.resultado;
+  }
 
   insertarRelacion(relacion: any){
     this.resultado = this._http.post(`${this.baseUrl}/maximum/maximum_facturam_relacion.php`, JSON.stringify(relacion));

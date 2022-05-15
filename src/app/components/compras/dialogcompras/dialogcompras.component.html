@@ -1,7 +1,32 @@
 <div class="tituloFactura">
     <h2>Compras</h2>
     <div class="cabeceraCompra">
-        <div class="row">
+        <!-- <div class="row">
+            <div class="col-md-3">
+                <span class="spanFactura"><b>Empresa: </b></span>
+                <select class="form-select" [(ngModel)]="selectEmpresa" (change)="cambioValorEmpresa($event.target.value)">
+                    <option selected value="0" >Seleccione...</option>
+                    <option *ngFor="let emp of empresasSelect" [value]="emp">{{emp}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="selectEmpresa == 'LAME'">
+            <app-dialoglame></app-dialoglame>
+        </div>
+        <div class="row" *ngIf="selectEmpresa == 'VT'">
+            <app-dialogvtcompras></app-dialogvtcompras>
+        </div>
+        <div class="row" *ngIf="selectEmpresa == 'MAXIMUM'">
+            <app-dialogmaximumcompras></app-dialogmaximumcompras>
+        </div>
+        <div class="row" *ngIf="selectEmpresa == 'FUNDACION'">
+            <app-dialogfundacioncompras></app-dialogfundacioncompras>
+        </div>
+        <div class="row" *ngIf="selectEmpresa == '0'">
+            <p class="text">Debe seleccionar una empresa</p>
+        </div> -->
+        <!-- <div class="row">
             <div class="col-sm-3">
                 <span class="spanFactura"><b>Tipo Comprobante: </b></span>
 
@@ -44,9 +69,9 @@
                 <input matInput type="text" class="form-control" placeholder="Dirección Proveedor"
                     [(ngModel)]="proveedor.direccion_prove" disabled>
             </div>
-        </div>
+        </div> -->
         <br>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-sm-4" style="display: block; margin: auto;">
                 <b>Emisión:</b>
                 <input class="fechaEmision" id="date" type="date" style="width: 50%;" [(ngModel)]="compra.emsion_com">
@@ -68,8 +93,8 @@
                 <input matInput type="text" class="form-control" placeholder="Aut. SRI"
                     [(ngModel)]="compra.autorizacionSRI_com">
             </div>
-        </div>
-        <div class="row">
+        </div> -->
+        <!--<div class="row"> 
             <div class="col-sm-4">
                 <div class="row">
                     <div class="col-sm-8">
@@ -124,7 +149,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </div>
