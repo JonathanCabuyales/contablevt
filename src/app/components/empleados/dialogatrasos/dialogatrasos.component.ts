@@ -65,6 +65,9 @@ export class DialogatrasosComponent implements OnInit {
       this.atraso.descripcion_atr = this.descripcion;
       this.atraso.nombre = this.usuario.nombres + ' ' + this.usuario.apellidos;
       this.atraso.correo = this.usuario.email;
+
+      console.log(this.atraso);
+      
       
       this._atrasos.getAtraso(this.atraso).subscribe(res=>{
         

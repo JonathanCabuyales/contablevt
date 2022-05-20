@@ -1,31 +1,23 @@
 <div class="tituloFactura">
     <h2>Compras</h2>
     <div class="cabeceraCompra">
-        <!-- <div class="row">
-            <div class="col-md-3">
+        <div class="row">
+            <div class="col-md-4">
                 <span class="spanFactura"><b>Empresa: </b></span>
                 <select class="form-select" [(ngModel)]="selectEmpresa" (change)="cambioValorEmpresa($event.target.value)">
                     <option selected value="0" >Seleccione...</option>
                     <option *ngFor="let emp of empresasSelect" [value]="emp">{{emp}}</option>
                 </select>
             </div>
+            <div class="col text-left left mt-4">
+                <div class="row" *ngIf="selectEmpresa == '0'">
+                    
+                    <p class="text">Debe seleccionar una empresa</p>
+                </div>
+            </div>
         </div>
 
-        <div class="row" *ngIf="selectEmpresa == 'LAME'">
-            <app-dialoglame></app-dialoglame>
-        </div>
-        <div class="row" *ngIf="selectEmpresa == 'VT'">
-            <app-dialogvtcompras></app-dialogvtcompras>
-        </div>
-        <div class="row" *ngIf="selectEmpresa == 'MAXIMUM'">
-            <app-dialogmaximumcompras></app-dialogmaximumcompras>
-        </div>
-        <div class="row" *ngIf="selectEmpresa == 'FUNDACION'">
-            <app-dialogfundacioncompras></app-dialogfundacioncompras>
-        </div>
-        <div class="row" *ngIf="selectEmpresa == '0'">
-            <p class="text">Debe seleccionar una empresa</p>
-        </div> -->
+        
         <!-- <div class="row">
             <div class="col-sm-3">
                 <span class="spanFactura"><b>Tipo Comprobante: </b></span>
@@ -155,13 +147,27 @@
 </div>
 <br>
 
-<div class="tituloFactura">
+<div class="row" *ngIf="selectEmpresa == 'LAMME'">
+    <app-dialoglame [empresa]="selectEmpresa"></app-dialoglame>
+</div>
+<div class="row" *ngIf="selectEmpresa == 'VT'">
+    <app-dialogvtcompras [empresa]="selectEmpresa"></app-dialogvtcompras>
+</div>
+<div class="row" *ngIf="selectEmpresa == 'MAXIMUM'">
+    <app-dialogmaximumcompras [empresa]="selectEmpresa"></app-dialogmaximumcompras>
+</div>
+<div class="row" *ngIf="selectEmpresa == 'FUNDACION'">
+    <app-dialofundacioncompras [empresa]="selectEmpresa"></app-dialofundacioncompras>
+</div>
+
+
+<!-- <div class="tituloFactura">
 
     <div class="itemscompras">
         <div class="row">
             <div class="col-sm-6">
                 <div class="botonesVentas">
-                    <!-- *ngIf="showbtnFactura" -->
+                    *ngIf="showbtnFactura"
                     <button class="btn" style="margin: 10px 10px;" (click)="items()">Añadir
                         Concepto<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                             fill="#FFFFFF">
@@ -179,14 +185,14 @@
                                 d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                         </svg></button>
                 </div>
-                <!-- <div class="botonesVentas">
+                <div class="botonesVentas">
                     <button class="btn" style="margin: 10px 10px;" (click)="generarRetencion()">Generar Retención<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                             fill="#FFFFFF">
                             <path d="M0 0h24v24H0V0z" fill="none" />
                             <path
                                 d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                         </svg></button>
-                </div> -->
+                </div>
             </div>
 
             <div class="col-sm-6">
@@ -302,4 +308,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

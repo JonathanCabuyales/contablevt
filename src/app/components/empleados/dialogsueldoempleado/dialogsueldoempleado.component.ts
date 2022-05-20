@@ -306,6 +306,8 @@ export class DialogsueldoempleadoComponent implements OnInit {
       // actualizacion 30 de diciembre del 2021
       // si el tiempo de atraso no justificado es mayor que 10 se procede al descuento
       if (parseInt(this.tiemponojusti) > 10) {
+        console.log(this.multaatrasos);
+        
         this.sueldo.otrosegresos = (parseFloat(this.multaatrasos) + ((parseFloat(this.empleadoSueldo.sueldo) * 10) / 100)).toFixed(2);
       } else {
         this.sueldo.otrosegresos = '0';

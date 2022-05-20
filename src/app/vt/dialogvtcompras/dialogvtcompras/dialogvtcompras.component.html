@@ -1,1 +1,133 @@
-<p>dialogvtcompras works!</p>
+<div class="tituloFactura">
+    <h2>{{empresa}}</h2>
+    <div class="cabeceraCompra">
+        <div class="row mt-2">
+            <div class="col-md-5">
+                <span class="spanFactura">Seleccione..</span>
+                <select class="form-select" [(ngModel)]="tipo" (ngModelChange)="cambioValor()" aria-placeholder="Seleccione">
+                    <option value="0" selected>Seleccione...</option>
+                    <option value="1">Ingresos</option>
+                    <option value="2">Egresos</option>
+                </select>
+            </div>
+        </div>
+        
+        <ng-container *ngIf="tipo === '1'" >
+            <h4 class="mt-4">Ingresos</h4>
+            <div class="row">
+                <div class="col-md-5">
+                    <span class="spanFactura"><b>Descripcion: </b></span>
+                    <input class="form-control" type="text" placeholder="Descripcion" [(ngModel)]="desc">
+                </div>
+                <div class="col-md-4">
+                    <span class="spanFactura"><b>SubTotal: </b></span>
+                    <input type="number" class="form-control" id="subtotal"  placeholder="Subtotal" [(ngModel)]="subt" (ngModelChange)="calcularIVA($event)">
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="spanFactura"><b>Descuento: </b></span>
+                    <input class="form-control" type="number" placeholder="Descuento" [(ngModel)]="des" (ngModelChange)="calcularDes($event)">
+                </div>
+                <div class="col-md-4">
+                    <span class="spanFactura"><b>Iva 12%: </b></span>
+                    <input type="text" disabled readonly class="form-control" placeholder="IVA 12%" [(ngModel)]="iva">
+                </div>
+                <div class="col-md-4">
+                    <span class="spanFactura"><b>Total: </b></span>
+                    <input type="text" disabled readonly class="form-control" placeholder="Total" [(ngModel)]="total">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col" style="text-align: end;">
+                    <button type="button" class="btn btnagregar" value="Registrar Ingreso" (click)="registrarIngresos()">Registrar Ingreso</button>
+                </div>
+                <div class="col d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btncancelar" value="Cancelar">Cancelar</button>
+                </div>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngIf="tipo === '2'" class="mt-4">
+            <h4 class="mt-4">Egresos</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="spanFactura">
+                        <b>Factura Nº</b>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Factura Nº" [(ngModel)]="facturaEgreso" (ngModelChange)="cambioFacturaEgreso($event)">
+                </div>
+                <div class="col-md-3">
+                    <span class="spanFactura">
+                        <b>Fecha emisión</b>
+                    </span>
+                    <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="fechaFacturaEgreso" (ngModelChange)="cambioFechaFactura($event)">
+                </div>
+                <div class="col-md-3">
+                    <span class="spanFactura">
+                        <b>Fecha autorización</b>
+                    </span>
+                    <input type="date" class="form-control" placeholder="Fecha" [(ngModel)]="fechaAutorizazionEgreso" (ngModelChange)="cambioFechaAutorizacion($event)">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <span class="spanFactura">
+                        <b>Autorizacion</b>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Autorizacion" [(ngModel)]="autorizacionFacturaEgreso" (ngModelChange)="autorizacionFactura($event)">
+                </div>
+                <div class="col-md-5">
+                    <span class="spanFactura">
+                        <b>Descripcion</b>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Descripcion" [(ngModel)]="descripcionEgreso" (ngModelChange)="cambioDescripcionEgreso($event)">
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="spanFactura">
+                        <b>Subtotal</b>
+                    </span>
+                    <input type="number" class="form-control" placeholder="Subtotal" [(ngModel)]="subtotalEgreso" (ngModelChange)="cambioSubtotalFactura($event)">
+                </div>
+                <div class="col">
+                    <span class="spanFactura">
+                        <b>Iva</b>
+                    </span>
+                    <select class="form-select" [(ngModel)]="ivaEgreso" (ngModelChange)="cambioIvaFactura($event)">
+                        <option selected value="#">Seleccione..</option>
+                        <option value="0">0%</option>
+                        <option value="12">12%</option>
+                        <option value="150">No Objeto de Iva%</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <span class="spanFactura">
+                        <b>Valor Iva</b>
+                    </span>
+                    <input class="form-control" disabled readonly type="number" [(ngModel)]="ivavalorEgreso" placeholder="IVA">
+                </div>
+                <div class="col">
+                    <span class="spanFactura">
+                        <b>Total:</b>
+                    </span>
+                    <input class="form-control" disabled readonly type="number" [(ngModel)]="totalEgreso" placeholder="Total">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col" style="text-align: end;">
+                    <button type="button" class="btn btnagregar" value="Registrar Ingreso" (click)="enviarEgresos()">Registrar Egreso</button>
+                </div>
+                <div class="col d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btncancelar" value="Cancelar">Cancelar</button>
+                </div>
+            </div>
+            
+        </ng-container>
+        
+        
+    </div>
+</div>

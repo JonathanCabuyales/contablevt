@@ -30,7 +30,7 @@ export class DialogcomprasregistradasComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.loadCompras();
+    // this.loadCompras();
     
   }
 

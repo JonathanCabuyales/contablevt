@@ -38,7 +38,7 @@ export class DialogcomprasComponent implements OnInit {
   ice: number = 0;
   propina: number = 0;
   totalFactura: string = '0';
-  empresasSelect: any[] = ['LAME', 'VT', 'MAXIMUM', 'FUNDACION']; 
+  empresasSelect: any[] = ['LAMME', 'VT', 'MAXIMUM', 'FUNDACION']; 
 
   selectEmpresa: any = '0';
 

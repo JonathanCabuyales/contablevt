@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dialogmaximumcompras',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialogmaximumcompras.component.css']
 })
 export class DialogmaximumcomprasComponent implements OnInit {
+
+
+  @Input() empresa: string ='';
 
   constructor() { }
 

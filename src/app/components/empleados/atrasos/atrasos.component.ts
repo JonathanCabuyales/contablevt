@@ -65,6 +65,8 @@ export class AtrasosComponent implements OnInit {
     };
 
     this._login.getuserdata(this.token).subscribe((res) => {
+      console.log(res);
+      
       this.rol = res.data.rol;
       this.id_usuario = res.data.id;
     });
@@ -87,6 +89,8 @@ export class AtrasosComponent implements OnInit {
 
   loadAtrasos() {
     this._atrasos.getAtrasos(this.token).subscribe((res) => {
+      console.log(res);
+      
       if (res.data) {
         this.listaAtrasos = res.data;
         this.dataSource = new MatTableDataSource(this.listaAtrasos);
@@ -156,8 +160,11 @@ export class AtrasosComponent implements OnInit {
     this.atraso.descripcion_atr = notificacion.descripcion_atr;
     this.atraso.nombre = notificacion.nombres + ' ' + notificacion.apellidos;
     this.atraso.correo = notificacion.email;
+
+    console.log(this.atraso);
     
-    this._atrasos.sendMail(this.atraso).subscribe(res=>{
+    
+    /* this._atrasos.sendMail(this.atraso).subscribe(res=>{
       if(res.data){
         this.toastSuccess("Hemos reenviado la notificación correctamente");
       }else{
@@ -165,7 +172,7 @@ export class AtrasosComponent implements OnInit {
       }
       
     });
-    
+     */
   }
   // funcion para filtro de busqueda
   applyFilter(filtro: string) {

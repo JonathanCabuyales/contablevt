@@ -182,6 +182,7 @@ import { DialogvtcomprasComponent } from './vt/dialogvtcompras/dialogvtcompras/d
 import { DialogmaximumcomprasComponent } from './maximum/dialogmaximumcompras/dialogmaximumcompras/dialogmaximumcompras.component';
 import { DialofundacioncomprasComponent } from './fundacion/dialogfundacioncompras/dialofundacioncompras/dialofundacioncompras.component';
 import { CreatereportmaximumComponent } from './components/maximum/createreportmaximum/createreportmaximum.component';
+import { DialogfundacionComponent } from './components/fundacion/dialogfundacion/dialogfundacion.component';
 
 // import { DialogcreditmaximumComponent } from './component/maximum/dialogcreditmaximum/dialogcreditmaximum.component';
 
@@ -296,7 +297,8 @@ import { CreatereportmaximumComponent } from './components/maximum/createreportm
     DialogvtcomprasComponent,
     DialogmaximumcomprasComponent,
     DialofundacioncomprasComponent,
-    CreatereportmaximumComponent
+    CreatereportmaximumComponent,
+    DialogfundacionComponent
     ],
   imports: [
     BrowserModule,
